@@ -47,16 +47,17 @@ public class KafkaAvroProducerApplication implements CommandLineRunner {
 				"\"namespace\":\"com.example\"," +
 				"\"name\":\"AvroMessage\"," +
 				"\"fields\":[" +
-					"{\"name\":\"f1\",\"type\":\"string\"}" +
+					"{\"name\":\"f1\",\"type\":[\"string\",\"null\"]}" +
 				"]" +
 			"}";
 		Schema.Parser parser = new Schema.Parser();
 		Schema schema = parser.parse(messageSchema);
 		GenericRecord avroMessage = new GenericData.Record(schema);
-		avroMessage.put("f1", "value1");
+		avroMessage.put("f1", "value" + (Math.random() * 1000));
 
 		ProducerRecord<Object, Object> record = new ProducerRecord<>(messagesTopic, key, avroMessage);
 		try {
+			log.info("sending {}", record);
 			producer.send(record).get();
 			producer.flush();
 		} catch(Exception e) {
