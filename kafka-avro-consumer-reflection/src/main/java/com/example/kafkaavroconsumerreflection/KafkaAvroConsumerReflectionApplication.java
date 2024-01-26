@@ -1,4 +1,4 @@
-package com.example.kafkaavroconsumer;
+package com.example.kafkaavroconsumerreflection;
 
 import org.apache.avro.generic.GenericRecord;
 import org.apache.kafka.clients.consumer.*;
@@ -13,12 +13,12 @@ import java.util.Arrays;
 import java.util.Properties;
 
 @SpringBootApplication
-public class KafkaAvroConsumerApplication implements CommandLineRunner {
+public class KafkaAvroConsumerReflectionApplication implements CommandLineRunner {
 
-	private static final Logger log = LoggerFactory.getLogger(KafkaAvroConsumerApplication.class);
+	private static final Logger log = LoggerFactory.getLogger(KafkaAvroConsumerReflectionApplication.class);
 
 	public static void main(String[] args) {
-		SpringApplication.run(KafkaAvroConsumerApplication.class, args);
+		SpringApplication.run(KafkaAvroConsumerReflectionApplication.class, args);
 	}
 
 	@Value("${bootstrap.servers:localhost:9092}")
@@ -36,7 +36,7 @@ public class KafkaAvroConsumerApplication implements CommandLineRunner {
 		props.put(ConsumerConfig.GROUP_ID_CONFIG, "group1");
 
 		props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, org.apache.kafka.common.serialization.StringDeserializer.class);
-		props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, io.confluent.kafka.serializers.KafkaAvroDeserializer.class);
+		props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, io.confluent.kafka.streams.serdes.avro.ReflectionAvroDeserializer.class);
 		props.put("schema.registry.url", schemaRegistryUrl);
 
 		props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
@@ -55,4 +55,5 @@ public class KafkaAvroConsumerApplication implements CommandLineRunner {
 			consumer.close();
 		}
 	}
+
 }
