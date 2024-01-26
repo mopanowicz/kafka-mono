@@ -2,6 +2,8 @@ package com.example.kafkaavroconsumer;
 
 import org.apache.avro.generic.GenericRecord;
 import org.apache.kafka.clients.consumer.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -13,6 +15,8 @@ import java.util.Properties;
 @SpringBootApplication
 public class KafkaAvroConsumerApplication implements CommandLineRunner {
 
+	private static final Logger log = LoggerFactory.getLogger(KafkaAvroConsumerApplication.class);
+
 	public static void main(String[] args) {
 		SpringApplication.run(KafkaAvroConsumerApplication.class, args);
 	}
@@ -21,6 +25,8 @@ public class KafkaAvroConsumerApplication implements CommandLineRunner {
 	String bootstrapServers;
 	@Value("${schema.registry.url:http://localhost:8081}")
 	String schemaRegistryUrl;
+	@Value("${messages.topic}")
+	String messagesTopic;
 
 	@Override
 	public void run(String... args) {
@@ -35,15 +41,14 @@ public class KafkaAvroConsumerApplication implements CommandLineRunner {
 
 		props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 
-		String topic = "topic1";
 		final Consumer<String, GenericRecord> consumer = new KafkaConsumer<String, GenericRecord>(props);
-		consumer.subscribe(Arrays.asList(topic));
+		consumer.subscribe(Arrays.asList(messagesTopic));
 
 		try {
 			while (true) {
 				ConsumerRecords<String, GenericRecord> records = consumer.poll(100);
 				for (ConsumerRecord<String, GenericRecord> record : records) {
-					System.out.printf("offset = %d, key = %s, value = %s \n", record.offset(), record.key(), record.value());
+					log.info("offset = {}, key = {}, value = {}}", record.offset(), record.key(), record.value());
 				}
 			}
 		} finally {
