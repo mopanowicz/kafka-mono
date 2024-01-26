@@ -46,9 +46,9 @@ public class KafkaAvroConsumerApplication implements CommandLineRunner {
 
 		try {
 			while (true) {
-				ConsumerRecords<String, GenericRecord> records = consumer.poll(100);
-				for (ConsumerRecord<String, GenericRecord> record : records) {
-					log.info("offset = {}, key = {}, value = {}}", record.offset(), record.key(), record.value());
+				ConsumerRecords<String, GenericRecord> messages = consumer.poll(100);
+				for (ConsumerRecord<String, GenericRecord> avroMessage : messages) {
+					log.info("offset = {}, key = {}, value = {}}", avroMessage.offset(), avroMessage.key(), avroMessage.value());
 				}
 			}
 		} finally {

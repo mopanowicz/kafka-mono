@@ -42,7 +42,7 @@ public class KafkaAvroProducerApplication implements CommandLineRunner {
 		KafkaProducer producer = new KafkaProducer(props);
 
 		String key = "key1";
-		String userSchema = "{" +
+		String messageSchema = "{" +
 				"\"type\":\"record\"," +
 				"\"namespace\":\"com.example\"," +
 				"\"name\":\"AvroMessage\"," +
@@ -51,11 +51,11 @@ public class KafkaAvroProducerApplication implements CommandLineRunner {
 				"]" +
 			"}";
 		Schema.Parser parser = new Schema.Parser();
-		Schema schema = parser.parse(userSchema);
-		GenericRecord avroRecord = new GenericData.Record(schema);
-		avroRecord.put("f1", "value1");
+		Schema schema = parser.parse(messageSchema);
+		GenericRecord avroMessage = new GenericData.Record(schema);
+		avroMessage.put("f1", "value1");
 
-		ProducerRecord<Object, Object> record = new ProducerRecord<>(messagesTopic, key, avroRecord);
+		ProducerRecord<Object, Object> record = new ProducerRecord<>(messagesTopic, key, avroMessage);
 		try {
 			producer.send(record).get();
 			producer.flush();
