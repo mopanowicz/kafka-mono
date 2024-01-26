@@ -1,5 +1,6 @@
 package com.example;
 
+import io.confluent.kafka.serializers.KafkaAvroSerializerConfig;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -34,12 +35,13 @@ public class KafkaAvroProducerReflectionApplication implements CommandLineRunner
 		props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
 		props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, org.apache.kafka.common.serialization.StringSerializer.class);
 		props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, io.confluent.kafka.streams.serdes.avro.ReflectionAvroSerializer.class);
+		props.put(KafkaAvroSerializerConfig.AVRO_REFLECTION_ALLOW_NULL_CONFIG, true);
 		props.put("schema.registry.url", schemaRegistryUrl);
 		KafkaProducer producer = new KafkaProducer(props);
 
 		String key = "reflection-key-1";
 		AvroMessage avroMessage = new AvroMessage();
-		avroMessage.setF1("value" + (Math.random() * 1000));
+		//avroMessage.setF1("value" + (Math.random() * 1000));
 
 		ProducerRecord<Object, Object> record = new ProducerRecord<>(messagesTopic, key, avroMessage);
 		try {
