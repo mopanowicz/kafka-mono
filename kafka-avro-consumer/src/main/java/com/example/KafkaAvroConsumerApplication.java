@@ -1,4 +1,4 @@
-package com.example.kafkaavroconsumer;
+package com.example;
 
 import org.apache.avro.generic.GenericRecord;
 import org.apache.kafka.clients.consumer.*;

@@ -1,12 +1,8 @@
-package com.example.kafkaavroproducer;
+package com.example;
 
-import org.apache.avro.Schema;
-import org.apache.avro.generic.GenericData;
-import org.apache.avro.generic.GenericRecord;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
-import org.apache.kafka.common.errors.SerializationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,12 +13,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.util.Properties;
 
 @SpringBootApplication
-public class KafkaAvroProducerApplication implements CommandLineRunner {
+public class KafkaAvroProducerReflectionApplication implements CommandLineRunner {
 
-	private static final Logger log = LoggerFactory.getLogger(KafkaAvroProducerApplication.class);
+	private static final Logger log = LoggerFactory.getLogger(KafkaAvroProducerReflectionApplication.class);
 
 	public static void main(String[] args) {
-		SpringApplication.run(KafkaAvroProducerApplication.class, args);
+		SpringApplication.run(KafkaAvroProducerReflectionApplication.class, args);
 	}
 
 	@Value("${bootstrap.servers:localhost:9092}")
@@ -37,23 +33,13 @@ public class KafkaAvroProducerApplication implements CommandLineRunner {
 		Properties props = new Properties();
 		props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
 		props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, org.apache.kafka.common.serialization.StringSerializer.class);
-		props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, io.confluent.kafka.serializers.KafkaAvroSerializer.class);
+		props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, io.confluent.kafka.streams.serdes.avro.ReflectionAvroSerializer.class);
 		props.put("schema.registry.url", schemaRegistryUrl);
 		KafkaProducer producer = new KafkaProducer(props);
 
-		String messageSchema = "{" +
-				"\"type\":\"record\"," +
-				"\"namespace\":\"com.example\"," +
-				"\"name\":\"AvroMessage\"," +
-				"\"fields\":[" +
-					"{\"name\":\"f1\",\"type\":[\"string\",\"null\"]}" +
-				"]" +
-			"}";
-		Schema.Parser parser = new Schema.Parser();
-		Schema schema = parser.parse(messageSchema);
-		String key = "key1";
-		GenericRecord avroMessage = new GenericData.Record(schema);
-		avroMessage.put("f1", "value" + (Math.random() * 1000));
+		String key = "reflection-key-1";
+		AvroMessage avroMessage = new AvroMessage();
+		avroMessage.setF1("value" + (Math.random() * 1000));
 
 		ProducerRecord<Object, Object> record = new ProducerRecord<>(messagesTopic, key, avroMessage);
 		try {
