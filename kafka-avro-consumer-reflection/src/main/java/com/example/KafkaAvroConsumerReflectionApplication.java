@@ -1,7 +1,6 @@
 package com.example;
 
 import io.confluent.kafka.serializers.KafkaAvroDeserializerConfig;
-import org.apache.avro.generic.GenericRecord;
 import org.apache.kafka.clients.consumer.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,22 +33,23 @@ public class KafkaAvroConsumerReflectionApplication implements CommandLineRunner
 		Properties props = new Properties();
 
 		props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-		props.put(ConsumerConfig.GROUP_ID_CONFIG, "group1");
+		props.put(ConsumerConfig.GROUP_ID_CONFIG, "reflection-group-1");
 
 		props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, org.apache.kafka.common.serialization.StringDeserializer.class);
 		props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, io.confluent.kafka.streams.serdes.avro.ReflectionAvroDeserializer.class);
 		props.put(KafkaAvroDeserializerConfig.AVRO_REFLECTION_ALLOW_NULL_CONFIG, true);
-		props.put("schema.registry.url", schemaRegistryUrl);
+		props.put(KafkaAvroDeserializerConfig.SCHEMA_REGISTRY_URL_CONFIG, schemaRegistryUrl);
 
 		props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 
-		final Consumer<String, GenericRecord> consumer = new KafkaConsumer<String, GenericRecord>(props);
+		final Consumer<String, AvroMessage> consumer = new KafkaConsumer<>(props);
 		consumer.subscribe(Arrays.asList(messagesTopic));
 
 		try {
 			while (true) {
-				ConsumerRecords<String, GenericRecord> messages = consumer.poll(100);
-				for (ConsumerRecord<String, GenericRecord> avroMessage : messages) {
+				ConsumerRecords<String, AvroMessage> messages = consumer.poll(100);
+				for (ConsumerRecord<String, AvroMessage> avroMessage : messages) {
+					AvroMessage value = avroMessage.value();
 					log.info("offset = {}, key = {}, value = {}", avroMessage.offset(), avroMessage.key(), avroMessage.value());
 				}
 			}
