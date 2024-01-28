@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class AvroMessage extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -6755538634977558020L;
+  private static final long serialVersionUID = -7659817674281432104L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"AvroMessage\",\"namespace\":\"com.example\",\"fields\":[{\"name\":\"f1\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"localDate\",\"type\":[\"null\",{\"type\":\"int\",\"logicalType\":\"date\"}]},{\"name\":\"amount\",\"type\":[\"null\",{\"type\":\"bytes\",\"logicalType\":\"decimal\",\"precision\":10,\"scale\":4}],\"default\":null},{\"name\":\"localDateTime\",\"type\":[\"null\",{\"type\":\"long\",\"logicalType\":\"local-timestamp-millis\"}],\"default\":null}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"AvroMessage\",\"namespace\":\"com.example\",\"fields\":[{\"name\":\"f1\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"localDate\",\"type\":[\"null\",{\"type\":\"int\",\"logicalType\":\"date\"}]},{\"name\":\"amount\",\"type\":[\"null\",{\"type\":\"bytes\",\"logicalType\":\"decimal\",\"precision\":10,\"scale\":4}],\"default\":null},{\"name\":\"amount2\",\"type\":[\"null\",{\"type\":\"bytes\",\"logicalType\":\"decimal\",\"precision\":10,\"scale\":4}],\"default\":null},{\"name\":\"localDateTime\",\"type\":[\"null\",{\"type\":\"long\",\"logicalType\":\"local-timestamp-millis\"}],\"default\":null}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -81,6 +81,7 @@ public class AvroMessage extends org.apache.avro.specific.SpecificRecordBase imp
   private java.lang.String f1;
   private java.time.LocalDate localDate;
   private java.math.BigDecimal amount;
+  private java.math.BigDecimal amount2;
   private java.time.LocalDateTime localDateTime;
 
   /**
@@ -95,12 +96,14 @@ public class AvroMessage extends org.apache.avro.specific.SpecificRecordBase imp
    * @param f1 The new value for f1
    * @param localDate The new value for localDate
    * @param amount The new value for amount
+   * @param amount2 The new value for amount2
    * @param localDateTime The new value for localDateTime
    */
-  public AvroMessage(java.lang.String f1, java.time.LocalDate localDate, java.math.BigDecimal amount, java.time.LocalDateTime localDateTime) {
+  public AvroMessage(java.lang.String f1, java.time.LocalDate localDate, java.math.BigDecimal amount, java.math.BigDecimal amount2, java.time.LocalDateTime localDateTime) {
     this.f1 = f1;
     this.localDate = localDate;
     this.amount = amount;
+    this.amount2 = amount2;
     this.localDateTime = localDateTime;
   }
 
@@ -117,7 +120,8 @@ public class AvroMessage extends org.apache.avro.specific.SpecificRecordBase imp
     case 0: return f1;
     case 1: return localDate;
     case 2: return amount;
-    case 3: return localDateTime;
+    case 3: return amount2;
+    case 4: return localDateTime;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -130,7 +134,8 @@ public class AvroMessage extends org.apache.avro.specific.SpecificRecordBase imp
     case 0: f1 = value$ != null ? value$.toString() : null; break;
     case 1: localDate = (java.time.LocalDate)value$; break;
     case 2: amount = (java.math.BigDecimal)value$; break;
-    case 3: localDateTime = (java.time.LocalDateTime)value$; break;
+    case 3: amount2 = (java.math.BigDecimal)value$; break;
+    case 4: localDateTime = (java.time.LocalDateTime)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -184,6 +189,23 @@ public class AvroMessage extends org.apache.avro.specific.SpecificRecordBase imp
    */
   public void setAmount(java.math.BigDecimal value) {
     this.amount = value;
+  }
+
+  /**
+   * Gets the value of the 'amount2' field.
+   * @return The value of the 'amount2' field.
+   */
+  public java.math.BigDecimal getAmount2() {
+    return amount2;
+  }
+
+
+  /**
+   * Sets the value of the 'amount2' field.
+   * @param value the value to set.
+   */
+  public void setAmount2(java.math.BigDecimal value) {
+    this.amount2 = value;
   }
 
   /**
@@ -247,6 +269,7 @@ public class AvroMessage extends org.apache.avro.specific.SpecificRecordBase imp
     private java.lang.String f1;
     private java.time.LocalDate localDate;
     private java.math.BigDecimal amount;
+    private java.math.BigDecimal amount2;
     private java.time.LocalDateTime localDateTime;
 
     /** Creates a new Builder */
@@ -272,9 +295,13 @@ public class AvroMessage extends org.apache.avro.specific.SpecificRecordBase imp
         this.amount = data().deepCopy(fields()[2].schema(), other.amount);
         fieldSetFlags()[2] = other.fieldSetFlags()[2];
       }
-      if (isValidValue(fields()[3], other.localDateTime)) {
-        this.localDateTime = data().deepCopy(fields()[3].schema(), other.localDateTime);
+      if (isValidValue(fields()[3], other.amount2)) {
+        this.amount2 = data().deepCopy(fields()[3].schema(), other.amount2);
         fieldSetFlags()[3] = other.fieldSetFlags()[3];
+      }
+      if (isValidValue(fields()[4], other.localDateTime)) {
+        this.localDateTime = data().deepCopy(fields()[4].schema(), other.localDateTime);
+        fieldSetFlags()[4] = other.fieldSetFlags()[4];
       }
     }
 
@@ -296,9 +323,13 @@ public class AvroMessage extends org.apache.avro.specific.SpecificRecordBase imp
         this.amount = data().deepCopy(fields()[2].schema(), other.amount);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.localDateTime)) {
-        this.localDateTime = data().deepCopy(fields()[3].schema(), other.localDateTime);
+      if (isValidValue(fields()[3], other.amount2)) {
+        this.amount2 = data().deepCopy(fields()[3].schema(), other.amount2);
         fieldSetFlags()[3] = true;
+      }
+      if (isValidValue(fields()[4], other.localDateTime)) {
+        this.localDateTime = data().deepCopy(fields()[4].schema(), other.localDateTime);
+        fieldSetFlags()[4] = true;
       }
     }
 
@@ -423,6 +454,46 @@ public class AvroMessage extends org.apache.avro.specific.SpecificRecordBase imp
     }
 
     /**
+      * Gets the value of the 'amount2' field.
+      * @return The value.
+      */
+    public java.math.BigDecimal getAmount2() {
+      return amount2;
+    }
+
+
+    /**
+      * Sets the value of the 'amount2' field.
+      * @param value The value of 'amount2'.
+      * @return This builder.
+      */
+    public com.example.AvroMessage.Builder setAmount2(java.math.BigDecimal value) {
+      validate(fields()[3], value);
+      this.amount2 = value;
+      fieldSetFlags()[3] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'amount2' field has been set.
+      * @return True if the 'amount2' field has been set, false otherwise.
+      */
+    public boolean hasAmount2() {
+      return fieldSetFlags()[3];
+    }
+
+
+    /**
+      * Clears the value of the 'amount2' field.
+      * @return This builder.
+      */
+    public com.example.AvroMessage.Builder clearAmount2() {
+      amount2 = null;
+      fieldSetFlags()[3] = false;
+      return this;
+    }
+
+    /**
       * Gets the value of the 'localDateTime' field.
       * @return The value.
       */
@@ -437,9 +508,9 @@ public class AvroMessage extends org.apache.avro.specific.SpecificRecordBase imp
       * @return This builder.
       */
     public com.example.AvroMessage.Builder setLocalDateTime(java.time.LocalDateTime value) {
-      validate(fields()[3], value);
+      validate(fields()[4], value);
       this.localDateTime = value;
-      fieldSetFlags()[3] = true;
+      fieldSetFlags()[4] = true;
       return this;
     }
 
@@ -448,7 +519,7 @@ public class AvroMessage extends org.apache.avro.specific.SpecificRecordBase imp
       * @return True if the 'localDateTime' field has been set, false otherwise.
       */
     public boolean hasLocalDateTime() {
-      return fieldSetFlags()[3];
+      return fieldSetFlags()[4];
     }
 
 
@@ -458,7 +529,7 @@ public class AvroMessage extends org.apache.avro.specific.SpecificRecordBase imp
       */
     public com.example.AvroMessage.Builder clearLocalDateTime() {
       localDateTime = null;
-      fieldSetFlags()[3] = false;
+      fieldSetFlags()[4] = false;
       return this;
     }
 
@@ -470,7 +541,8 @@ public class AvroMessage extends org.apache.avro.specific.SpecificRecordBase imp
         record.f1 = fieldSetFlags()[0] ? this.f1 : (java.lang.String) defaultValue(fields()[0]);
         record.localDate = fieldSetFlags()[1] ? this.localDate : (java.time.LocalDate) defaultValue(fields()[1]);
         record.amount = fieldSetFlags()[2] ? this.amount : (java.math.BigDecimal) defaultValue(fields()[2]);
-        record.localDateTime = fieldSetFlags()[3] ? this.localDateTime : (java.time.LocalDateTime) defaultValue(fields()[3]);
+        record.amount2 = fieldSetFlags()[3] ? this.amount2 : (java.math.BigDecimal) defaultValue(fields()[3]);
+        record.localDateTime = fieldSetFlags()[4] ? this.localDateTime : (java.time.LocalDateTime) defaultValue(fields()[4]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;

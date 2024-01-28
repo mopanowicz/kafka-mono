@@ -6,6 +6,7 @@
     {"name":"f1","type":["null","string"]},
     {"name":"localDate","type":["null",{"type":"int","logicalType":"date"}]},
     {"name":"amount","type":["null",{"type":"bytes","logicalType":"decimal","precision":10,"scale":4}],"default":null},
+    {"name":"amount2","type":["null",{"type":"bytes","logicalType":"decimal","precision":10,"scale":4}],"default":null},
     {"name":"localDateTime","type":["null",{"type":"long","logicalType":"local-timestamp-millis"}],"default":null}
   ]
 }

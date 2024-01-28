@@ -50,6 +50,7 @@ public class KafkaAvroProducerAvscApplication implements CommandLineRunner {
 		avroMessage.setAmount(new BigDecimal(Math.random() * 10000).setScale(4, RoundingMode.HALF_EVEN));
 		avroMessage.setLocalDate(LocalDate.now());
 		avroMessage.setLocalDateTime(LocalDateTime.now());
+		avroMessage.setAmount2(new BigDecimal(Math.random() * 10000).setScale(4, RoundingMode.HALF_EVEN));
 
 		ProducerRecord<Object, Object> record = new ProducerRecord<>(messagesTopic, key, avroMessage);
 		try {
