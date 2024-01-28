@@ -43,7 +43,7 @@ public class KafkaAvroProducerApplication implements CommandLineRunner {
 		props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, org.apache.kafka.common.serialization.StringSerializer.class);
 		props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, io.confluent.kafka.serializers.KafkaAvroSerializer.class);
 		props.put(KafkaAvroSerializerConfig.AVRO_USE_LOGICAL_TYPE_CONVERTERS_CONFIG, true);
-		props.put("schema.registry.url", schemaRegistryUrl);
+		props.put(KafkaAvroSerializerConfig.SCHEMA_REGISTRY_URL_CONFIG, schemaRegistryUrl);
 		KafkaProducer producer = new KafkaProducer(props);
 
 		String messageSchema = """
@@ -53,9 +53,9 @@ public class KafkaAvroProducerApplication implements CommandLineRunner {
 			"name":"AvroMessage",
 			"fields":[
 				{"name":"f1","type":["null","string"]},
-				{"name":"date","type":["null",{"type":"int","logicalType":"date"}]},
+				{"name":"localDate","type":["null",{"type":"int","logicalType":"date"}]},
 				{"name":"amount","type":["null",{"type":"bytes","logicalType":"decimal","precision":10,"scale":4}],"default":null},
-				{"name":"dateTime","type":["null",{"type":"long","logicalType":"local-timestamp-millis"}],"default":null}
+				{"name":"localDateTime","type":["null",{"type":"long","logicalType":"local-timestamp-millis"}],"default":null}
 			]
 		}
 		""";
@@ -66,9 +66,9 @@ public class KafkaAvroProducerApplication implements CommandLineRunner {
 
 		GenericRecord avroMessage = new GenericData.Record(schema);
 		avroMessage.put("f1", "string" + (int)(Math.random() * 1000));
-		avroMessage.put("date", LocalDate.now());
+		avroMessage.put("localDate", LocalDate.now());
 		avroMessage.put("amount", new BigDecimal(Math.random() * 10000).setScale(4, RoundingMode.HALF_EVEN));
-		avroMessage.put("dateTime", LocalDateTime.now());
+		avroMessage.put("localDateTime", LocalDateTime.now());
 
 		log.info("key={} value={}", key, avroMessage);
 
