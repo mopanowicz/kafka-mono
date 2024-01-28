@@ -1,5 +1,6 @@
 package com.example;
 
+import io.confluent.kafka.serializers.KafkaAvroSerializerConfig;
 import org.apache.avro.Schema;
 import org.apache.avro.generic.GenericData;
 import org.apache.avro.generic.GenericRecord;
@@ -13,6 +14,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Properties;
 
 @SpringBootApplication
@@ -37,26 +42,38 @@ public class KafkaAvroProducerApplication implements CommandLineRunner {
 		props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
 		props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, org.apache.kafka.common.serialization.StringSerializer.class);
 		props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, io.confluent.kafka.serializers.KafkaAvroSerializer.class);
+		props.put(KafkaAvroSerializerConfig.AVRO_USE_LOGICAL_TYPE_CONVERTERS_CONFIG, true);
 		props.put("schema.registry.url", schemaRegistryUrl);
 		KafkaProducer producer = new KafkaProducer(props);
 
-		String messageSchema = "{" +
-				"\"type\":\"record\"," +
-				"\"namespace\":\"com.example\"," +
-				"\"name\":\"AvroMessage\"," +
-				"\"fields\":[" +
-					"{\"name\":\"f1\",\"type\":[\"string\",\"null\"]}" +
-				"]" +
-			"}";
+		String messageSchema = """
+		{
+			"type":"record",
+			"namespace":"com.example",
+			"name":"AvroMessage",
+			"fields":[
+				{"name":"f1","type":["null","string"]},
+				{"name":"date","type":["null",{"type":"int","logicalType":"date"}]},
+				{"name":"amount","type":["null",{"type":"bytes","logicalType":"decimal","precision":10,"scale":4}],"default":null},
+				{"name":"dateTime","type":["null",{"type":"long","logicalType":"local-timestamp-millis"}],"default":null}
+			]
+		}
+		""";
 		Schema.Parser parser = new Schema.Parser();
 		Schema schema = parser.parse(messageSchema);
-		String key = "key1";
+
+		String key = "generic-key-"+ (int)(Math.random() * 1000);
+
 		GenericRecord avroMessage = new GenericData.Record(schema);
-		avroMessage.put("f1", "value" + (Math.random() * 1000));
+		avroMessage.put("f1", "string" + (int)(Math.random() * 1000));
+		avroMessage.put("date", LocalDate.now());
+		avroMessage.put("amount", new BigDecimal(Math.random() * 10000).setScale(4, RoundingMode.HALF_EVEN));
+		avroMessage.put("dateTime", LocalDateTime.now());
+
+		log.info("key={} value={}", key, avroMessage);
 
 		ProducerRecord<Object, Object> record = new ProducerRecord<>(messagesTopic, key, avroMessage);
 		try {
-			log.info("sending {}", record);
 			producer.send(record).get();
 			producer.flush();
 		} catch(Exception e) {
