@@ -1,10 +1,10 @@
-package com.example.kafkaavroproducerreflection;
+package com.example;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class KafkaAvroProducerReflectionApplicationTests {
+class KafkaAvroConsumerReflectionApplicationTests {
 
 	@Test
 	void contextLoads() {
