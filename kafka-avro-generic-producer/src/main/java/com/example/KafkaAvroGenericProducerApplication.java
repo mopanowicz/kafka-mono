@@ -65,7 +65,7 @@ public class KafkaAvroGenericProducerApplication implements CommandLineRunner {
 		String key = "generic-key-"+ (int)(Math.random() * 1000);
 
 		GenericRecord avroMessage = new GenericData.Record(schema);
-		avroMessage.put("f1", "string" + (int)(Math.random() * 1000));
+		avroMessage.put("f1", "generic-value-" + (int)(Math.random() * 1000));
 		avroMessage.put("localDate", LocalDate.now());
 		avroMessage.put("amount", new BigDecimal(Math.random() * 10000).setScale(4, RoundingMode.HALF_EVEN));
 		avroMessage.put("localDateTime", LocalDateTime.now());
