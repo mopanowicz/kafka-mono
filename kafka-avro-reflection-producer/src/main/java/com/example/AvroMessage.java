@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Data
 public class AvroMessage {
-    private String f1;
+    private String text;
     private BigDecimal amount;
     private Date date;
     private Timestamp timestamp;

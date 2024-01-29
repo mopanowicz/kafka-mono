@@ -44,7 +44,7 @@ public class KafkaAvroGenericProducerApplication implements CommandLineRunner {
 		props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, io.confluent.kafka.serializers.KafkaAvroSerializer.class);
 		props.put(KafkaAvroSerializerConfig.AVRO_USE_LOGICAL_TYPE_CONVERTERS_CONFIG, true);
 		props.put(KafkaAvroSerializerConfig.SCHEMA_REGISTRY_URL_CONFIG, schemaRegistryUrl);
-		KafkaProducer producer = new KafkaProducer(props);
+		KafkaProducer<String, GenericRecord> producer = new KafkaProducer<>(props);
 
 		String messageSchema = """
 		{
@@ -52,7 +52,7 @@ public class KafkaAvroGenericProducerApplication implements CommandLineRunner {
 			"namespace":"com.example",
 			"name":"AvroMessage",
 			"fields":[
-				{"name":"f1","type":["null","string"]},
+				{"name":"text","type":["null","string"]},
 				{"name":"localDate","type":["null",{"type":"int","logicalType":"date"}]},
 				{"name":"amount","type":["null",{"type":"bytes","logicalType":"decimal","precision":10,"scale":4}],"default":null},
 				{"name":"localDateTime","type":["null",{"type":"long","logicalType":"local-timestamp-millis"}],"default":null}
@@ -65,16 +65,16 @@ public class KafkaAvroGenericProducerApplication implements CommandLineRunner {
 		String key = "generic-key-"+ (int)(Math.random() * 1000);
 
 		GenericRecord avroMessage = new GenericData.Record(schema);
-		avroMessage.put("f1", "generic-value-" + (int)(Math.random() * 1000));
+		avroMessage.put("text", "generic-value-" + (int)(Math.random() * 1000));
 		avroMessage.put("localDate", LocalDate.now());
-		avroMessage.put("amount", new BigDecimal(Math.random() * 10000).setScale(4, RoundingMode.HALF_EVEN));
+		avroMessage.put("amount", BigDecimal.valueOf(Math.random() * 10000).setScale(4, RoundingMode.HALF_EVEN));
 		avroMessage.put("localDateTime", LocalDateTime.now());
 
 		log.info("key={} value={}", key, avroMessage);
 
-		ProducerRecord<Object, Object> record = new ProducerRecord<>(messagesTopic, key, avroMessage);
+		ProducerRecord<String, GenericRecord> producerRecord = new ProducerRecord<>(messagesTopic, key, avroMessage);
 		try {
-			producer.send(record).get();
+			producer.send(producerRecord).get();
 			producer.flush();
 		} catch(Exception e) {
 			log.error("exception", e);

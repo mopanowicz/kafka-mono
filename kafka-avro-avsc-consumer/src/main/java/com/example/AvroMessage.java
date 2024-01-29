@@ -15,7 +15,7 @@ public class AvroMessage extends org.apache.avro.specific.SpecificRecordBase imp
   private static final long serialVersionUID = -6755538634977558020L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"AvroMessage\",\"namespace\":\"com.example\",\"fields\":[{\"name\":\"f1\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"localDate\",\"type\":[\"null\",{\"type\":\"int\",\"logicalType\":\"date\"}]},{\"name\":\"amount\",\"type\":[\"null\",{\"type\":\"bytes\",\"logicalType\":\"decimal\",\"precision\":10,\"scale\":4}],\"default\":null},{\"name\":\"localDateTime\",\"type\":[\"null\",{\"type\":\"long\",\"logicalType\":\"local-timestamp-millis\"}],\"default\":null}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"AvroMessage\",\"namespace\":\"com.example\",\"fields\":[{\"name\":\"text\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"localDate\",\"type\":[\"null\",{\"type\":\"int\",\"logicalType\":\"date\"}]},{\"name\":\"amount\",\"type\":[\"null\",{\"type\":\"bytes\",\"logicalType\":\"decimal\",\"precision\":10,\"scale\":4}],\"default\":null},{\"name\":\"localDateTime\",\"type\":[\"null\",{\"type\":\"long\",\"logicalType\":\"local-timestamp-millis\"}],\"default\":null}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -76,7 +76,7 @@ public class AvroMessage extends org.apache.avro.specific.SpecificRecordBase imp
     return DECODER.decode(b);
   }
 
-  private java.lang.String f1;
+  private java.lang.String text;
   private java.time.LocalDate localDate;
   private java.math.BigDecimal amount;
   private java.time.LocalDateTime localDateTime;
@@ -90,13 +90,13 @@ public class AvroMessage extends org.apache.avro.specific.SpecificRecordBase imp
 
   /**
    * All-args constructor.
-   * @param f1 The new value for f1
+   * @param text The new value for text
    * @param localDate The new value for localDate
    * @param amount The new value for amount
    * @param localDateTime The new value for localDateTime
    */
-  public AvroMessage(java.lang.String f1, java.time.LocalDate localDate, java.math.BigDecimal amount, java.time.LocalDateTime localDateTime) {
-    this.f1 = f1;
+  public AvroMessage(java.lang.String text, java.time.LocalDate localDate, java.math.BigDecimal amount, java.time.LocalDateTime localDateTime) {
+    this.text = text;
     this.localDate = localDate;
     this.amount = amount;
     this.localDateTime = localDateTime;
@@ -112,7 +112,7 @@ public class AvroMessage extends org.apache.avro.specific.SpecificRecordBase imp
   @Override
   public java.lang.Object get(int field$) {
     switch (field$) {
-    case 0: return f1;
+    case 0: return text;
     case 1: return localDate;
     case 2: return amount;
     case 3: return localDateTime;
@@ -125,7 +125,7 @@ public class AvroMessage extends org.apache.avro.specific.SpecificRecordBase imp
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: f1 = value$ != null ? value$.toString() : null; break;
+    case 0: text = value$ != null ? value$.toString() : null; break;
     case 1: localDate = (java.time.LocalDate)value$; break;
     case 2: amount = (java.math.BigDecimal)value$; break;
     case 3: localDateTime = (java.time.LocalDateTime)value$; break;
@@ -134,20 +134,20 @@ public class AvroMessage extends org.apache.avro.specific.SpecificRecordBase imp
   }
 
   /**
-   * Gets the value of the 'f1' field.
-   * @return The value of the 'f1' field.
+   * Gets the value of the 'text' field.
+   * @return The value of the 'text' field.
    */
-  public java.lang.String getF1() {
-    return f1;
+  public java.lang.String getText() {
+    return text;
   }
 
 
   /**
-   * Sets the value of the 'f1' field.
+   * Sets the value of the 'text' field.
    * @param value the value to set.
    */
-  public void setF1(java.lang.String value) {
-    this.f1 = value;
+  public void setText(java.lang.String value) {
+    this.text = value;
   }
 
   /**
@@ -242,7 +242,7 @@ public class AvroMessage extends org.apache.avro.specific.SpecificRecordBase imp
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<AvroMessage>
     implements org.apache.avro.data.RecordBuilder<AvroMessage> {
 
-    private java.lang.String f1;
+    private java.lang.String text;
     private java.time.LocalDate localDate;
     private java.math.BigDecimal amount;
     private java.time.LocalDateTime localDateTime;
@@ -258,8 +258,8 @@ public class AvroMessage extends org.apache.avro.specific.SpecificRecordBase imp
      */
     private Builder(com.example.AvroMessage.Builder other) {
       super(other);
-      if (isValidValue(fields()[0], other.f1)) {
-        this.f1 = data().deepCopy(fields()[0].schema(), other.f1);
+      if (isValidValue(fields()[0], other.text)) {
+        this.text = data().deepCopy(fields()[0].schema(), other.text);
         fieldSetFlags()[0] = other.fieldSetFlags()[0];
       }
       if (isValidValue(fields()[1], other.localDate)) {
@@ -282,8 +282,8 @@ public class AvroMessage extends org.apache.avro.specific.SpecificRecordBase imp
      */
     private Builder(com.example.AvroMessage other) {
       super(SCHEMA$, MODEL$);
-      if (isValidValue(fields()[0], other.f1)) {
-        this.f1 = data().deepCopy(fields()[0].schema(), other.f1);
+      if (isValidValue(fields()[0], other.text)) {
+        this.text = data().deepCopy(fields()[0].schema(), other.text);
         fieldSetFlags()[0] = true;
       }
       if (isValidValue(fields()[1], other.localDate)) {
@@ -301,29 +301,29 @@ public class AvroMessage extends org.apache.avro.specific.SpecificRecordBase imp
     }
 
     /**
-      * Gets the value of the 'f1' field.
+      * Gets the value of the 'text' field.
       * @return The value.
       */
-    public java.lang.String getF1() {
-      return f1;
+    public java.lang.String getText() {
+      return text;
     }
 
 
     /**
-      * Sets the value of the 'f1' field.
-      * @param value The value of 'f1'.
+      * Sets the value of the 'text' field.
+      * @param value The value of 'text'.
       * @return This builder.
       */
-    public com.example.AvroMessage.Builder setF1(java.lang.String value) {
+    public com.example.AvroMessage.Builder setText(java.lang.String value) {
       validate(fields()[0], value);
-      this.f1 = value;
+      this.text = value;
       fieldSetFlags()[0] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'f1' field has been set.
-      * @return True if the 'f1' field has been set, false otherwise.
+      * Checks whether the 'text' field has been set.
+      * @return True if the 'text' field has been set, false otherwise.
       */
     public boolean hasF1() {
       return fieldSetFlags()[0];
@@ -331,11 +331,11 @@ public class AvroMessage extends org.apache.avro.specific.SpecificRecordBase imp
 
 
     /**
-      * Clears the value of the 'f1' field.
+      * Clears the value of the 'text' field.
       * @return This builder.
       */
     public com.example.AvroMessage.Builder clearF1() {
-      f1 = null;
+      text = null;
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -465,7 +465,7 @@ public class AvroMessage extends org.apache.avro.specific.SpecificRecordBase imp
     public AvroMessage build() {
       try {
         AvroMessage record = new AvroMessage();
-        record.f1 = fieldSetFlags()[0] ? this.f1 : (java.lang.String) defaultValue(fields()[0]);
+        record.text = fieldSetFlags()[0] ? this.text : (java.lang.String) defaultValue(fields()[0]);
         record.localDate = fieldSetFlags()[1] ? this.localDate : (java.time.LocalDate) defaultValue(fields()[1]);
         record.amount = fieldSetFlags()[2] ? this.amount : (java.math.BigDecimal) defaultValue(fields()[2]);
         record.localDateTime = fieldSetFlags()[3] ? this.localDateTime : (java.time.LocalDateTime) defaultValue(fields()[3]);

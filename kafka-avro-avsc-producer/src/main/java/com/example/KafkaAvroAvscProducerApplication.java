@@ -41,20 +41,20 @@ public class KafkaAvroAvscProducerApplication implements CommandLineRunner {
 		props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, io.confluent.kafka.serializers.KafkaAvroSerializer.class);
 		props.put(KafkaAvroSerializerConfig.AVRO_USE_LOGICAL_TYPE_CONVERTERS_CONFIG, true);
 		props.put(KafkaAvroSerializerConfig.SCHEMA_REGISTRY_URL_CONFIG, schemaRegistryUrl);
-		KafkaProducer producer = new KafkaProducer(props);
+		KafkaProducer<String, AvroMessage> producer = new KafkaProducer<>(props);
 
 		String key = "avsc-key-1";
 		AvroMessage avroMessage = new AvroMessage();
-		avroMessage.setF1("avsc-value-" + (long)(Math.random() * 1000));
-		avroMessage.setAmount(new BigDecimal(Math.random() * 10000).setScale(4, RoundingMode.HALF_EVEN));
+		avroMessage.setText("avsc-value-" + (int)(Math.random() * 1000));
+		avroMessage.setAmount(BigDecimal.valueOf(Math.random() * 10000).setScale(4, RoundingMode.HALF_EVEN));
 		avroMessage.setLocalDate(LocalDate.now());
 		avroMessage.setLocalDateTime(LocalDateTime.now());
-		avroMessage.setAmount2(new BigDecimal(Math.random() * 10000).setScale(4, RoundingMode.HALF_EVEN));
+		avroMessage.setAmount2(BigDecimal.valueOf(Math.random() * 10000).setScale(4, RoundingMode.HALF_EVEN));
 
-		ProducerRecord<Object, Object> record = new ProducerRecord<>(messagesTopic, key, avroMessage);
+		ProducerRecord<String,AvroMessage> producerRecord = new ProducerRecord<>(messagesTopic, key, avroMessage);
 		try {
-			log.info("sending {}", record);
-			producer.send(record).get();
+			log.info("sending {}", producerRecord);
+			producer.send(producerRecord).get();
 			producer.flush();
 		} catch(Exception e) {
 			log.error("exception", e);

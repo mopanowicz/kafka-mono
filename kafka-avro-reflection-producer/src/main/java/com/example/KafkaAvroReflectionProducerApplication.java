@@ -42,23 +42,23 @@ public class KafkaAvroReflectionProducerApplication implements CommandLineRunner
 		props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, io.confluent.kafka.streams.serdes.avro.ReflectionAvroSerializer.class);
 		props.put(KafkaAvroSerializerConfig.AVRO_REFLECTION_ALLOW_NULL_CONFIG, true);
 		props.put(KafkaAvroSerializerConfig.SCHEMA_REGISTRY_URL_CONFIG, schemaRegistryUrl);
-		KafkaProducer producer = new KafkaProducer(props);
+		KafkaProducer<String, AvroMessage> producer = new KafkaProducer<>(props);
 
 		String key = "reflection-key-1";
 		AvroMessage avroMessage = new AvroMessage();
-		avroMessage.setF1("reflection-value-" + (long)(Math.random() * 1000));
-		avroMessage.setAmount(new BigDecimal(Math.random() * 10000).setScale(4, RoundingMode.HALF_EVEN));
+		avroMessage.setText("reflection-value-" + (int)(Math.random() * 1000));
+		avroMessage.setAmount(BigDecimal.valueOf(Math.random() * 10000).setScale(4, RoundingMode.HALF_EVEN));
 		avroMessage.setDate(Date.from(Instant.now()));
 		avroMessage.setTimestamp(Timestamp.from(Instant.now()));
 //		avroMessage.setLocalDate(LocalDate.now());
 //		avroMessage.setLocalDateTime(LocalDateTime.now());
 
-		ProducerRecord<Object, Object> record = new ProducerRecord<>(messagesTopic, key, avroMessage);
+		ProducerRecord<String, AvroMessage> producerRecord = new ProducerRecord<>(messagesTopic, key, avroMessage);
 		try {
-			log.info("sending {}", record);
-			producer.send(record).get();
+			log.info("sending {}", producerRecord);
+			producer.send(producerRecord).get();
 			producer.flush();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			log.error("exception", e);
 		} finally {
 			producer.close();
