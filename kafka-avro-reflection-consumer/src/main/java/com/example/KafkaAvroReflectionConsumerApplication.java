@@ -9,7 +9,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.util.Arrays;
+import java.time.Duration;
+import java.util.Collections;
 import java.util.Properties;
 
 @SpringBootApplication
@@ -43,19 +44,15 @@ public class KafkaAvroReflectionConsumerApplication implements CommandLineRunner
 		props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 
 		final Consumer<String, AvroMessage> consumer = new KafkaConsumer<>(props);
-		consumer.subscribe(Arrays.asList(messagesTopic));
 
-		try {
-			while (true) {
-				ConsumerRecords<String, AvroMessage> messages = consumer.poll(100);
-				for (ConsumerRecord<String, AvroMessage> avroMessage : messages) {
-					AvroMessage value = avroMessage.value();
-					log.info("offset = {}, key = {}, value = {}", avroMessage.offset(), avroMessage.key(), avroMessage.value());
-				}
-			}
-		} finally {
-			consumer.close();
-		}
+        try (consumer) {
+            consumer.subscribe(Collections.singletonList(messagesTopic));
+            while (true) {
+                ConsumerRecords<String, AvroMessage> messages = consumer.poll(Duration.ofMillis(100));
+                for (ConsumerRecord<String, AvroMessage> avroMessage : messages) {
+                    log.info("offset = {}, key = {}, value = {}", avroMessage.offset(), avroMessage.key(), avroMessage.value());
+                }
+            }
+        }
 	}
-
 }
