@@ -15,7 +15,6 @@
 	<description>Kafka avro reflection based consumer demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
-		<kafka.clients.version>3.5.1</kafka.clients.version>
 		<confluent.version>7.5.1</confluent.version>
 	</properties>
 	<dependencies>
