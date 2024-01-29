@@ -13,6 +13,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.Date;
 import java.util.Properties;
 
@@ -46,7 +48,8 @@ public class KafkaAvroReflectionProducerApplication implements CommandLineRunner
 		AvroMessage avroMessage = new AvroMessage();
 		avroMessage.setF1("reflection-value-" + (long)(Math.random() * 1000));
 		avroMessage.setAmount(new BigDecimal(Math.random() * 10000).setScale(4, RoundingMode.HALF_EVEN));
-		avroMessage.setDate(new Date());
+		avroMessage.setDate(Date.from(Instant.now()));
+		avroMessage.setTimestamp(Timestamp.from(Instant.now()));
 //		avroMessage.setLocalDate(LocalDate.now());
 //		avroMessage.setLocalDateTime(LocalDateTime.now());
 
