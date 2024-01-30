@@ -1,0 +1,11 @@
+[Unit]
+Description=Bootstrapped Schema Registry
+After=syslog.target network.target
+[Service]
+Type=simple
+User=user
+Group=user
+ExecStart=/opt/schema-registry/bin/schema-registry-start /opt/schema-registry/config/schema-registry.properties
+ExecStop=/opt/schema-registry/bin/schema-registry-stop
+[Install]
+WantedBy=multi-user.target
