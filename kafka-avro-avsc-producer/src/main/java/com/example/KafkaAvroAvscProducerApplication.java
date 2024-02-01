@@ -1,5 +1,6 @@
 package com.example;
 
+import io.confluent.kafka.serializers.AbstractKafkaSchemaSerDeConfig;
 import io.confluent.kafka.serializers.KafkaAvroSerializerConfig;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -16,6 +17,7 @@ import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Properties;
+import java.util.Random;
 
 @SpringBootApplication
 public class KafkaAvroAvscProducerApplication implements CommandLineRunner {
@@ -26,12 +28,14 @@ public class KafkaAvroAvscProducerApplication implements CommandLineRunner {
 		SpringApplication.run(KafkaAvroAvscProducerApplication.class, args);
 	}
 
-	@Value("${bootstrap.servers:localhost:9092}")
+	@Value("${bootstrap.servers}")
 	String bootstrapServers;
-	@Value("${schema.registry.url:http://localhost:8081}")
+	@Value("${schema.registry.url}")
 	String schemaRegistryUrl;
 	@Value("${messages.topic}")
 	String messagesTopic;
+
+	Random random = new Random();
 
 	@Override
 	public void run(String... args) {
@@ -40,24 +44,22 @@ public class KafkaAvroAvscProducerApplication implements CommandLineRunner {
 		props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, org.apache.kafka.common.serialization.StringSerializer.class);
 		props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, io.confluent.kafka.serializers.KafkaAvroSerializer.class);
 		props.put(KafkaAvroSerializerConfig.AVRO_USE_LOGICAL_TYPE_CONVERTERS_CONFIG, true);
-		props.put(KafkaAvroSerializerConfig.SCHEMA_REGISTRY_URL_CONFIG, schemaRegistryUrl);
+		props.put(AbstractKafkaSchemaSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, schemaRegistryUrl);
 		KafkaProducer<String, AvroMessage> producer = new KafkaProducer<>(props);
 
 		String key = "avsc-key-1";
 		AvroMessage avroMessage = new AvroMessage();
-		avroMessage.setText("avsc-value-" + (int)(Math.random() * 1000));
-		avroMessage.setAmount(BigDecimal.valueOf(Math.random() * 10000).setScale(4, RoundingMode.HALF_EVEN));
+		avroMessage.setText("avsc-value-" + random.nextInt());
+		avroMessage.setAmount(BigDecimal.valueOf(random.nextDouble()).setScale(4, RoundingMode.HALF_EVEN));
 		avroMessage.setLocalDate(LocalDate.now());
 		avroMessage.setLocalDateTime(LocalDateTime.now());
-		avroMessage.setAmount2(BigDecimal.valueOf(Math.random() * 10000).setScale(4, RoundingMode.HALF_EVEN));
+		avroMessage.setAmount2(BigDecimal.valueOf(random.nextDouble()).setScale(4, RoundingMode.HALF_EVEN));
 
 		ProducerRecord<String,AvroMessage> producerRecord = new ProducerRecord<>(messagesTopic, key, avroMessage);
 		try {
 			log.info("sending {}", producerRecord);
-			producer.send(producerRecord).get();
+			producer.send(producerRecord);
 			producer.flush();
-		} catch(Exception e) {
-			log.error("exception", e);
 		} finally {
 			producer.close();
 		}
