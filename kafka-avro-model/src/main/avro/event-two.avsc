@@ -3,9 +3,8 @@
   "namespace":"com.example",
   "name":"EventTwo",
   "fields":[
-    {"name":"id2","type":["null","string"]},
-    {"name":"description2","type":["null","string"]},
-    {"name":"timestamp2","type":["null",{"type":"long","logicalType":"local-timestamp-millis"}],"default":null},
-    {"name":"decimal2","type":["null",{"type":"bytes","logicalType":"decimal","precision":10,"scale":4}],"default":null}
+    {"name":"id","type":["null","string"]},
+    {"name":"sent","type":["null",{"type":"long","logicalType":"local-timestamp-millis"}],"default":null},
+    {"name":"amount","type":["null",{"type":"bytes","logicalType":"decimal","precision":10,"scale":4}],"default":null}
   ]
 }

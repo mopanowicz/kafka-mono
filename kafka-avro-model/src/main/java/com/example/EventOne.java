@@ -14,16 +14,15 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class EventOne extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 6078909423853949863L;
+  private static final long serialVersionUID = 2955100295143754995L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"EventOne\",\"namespace\":\"com.example\",\"fields\":[{\"name\":\"id\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"description\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"timestamp\",\"type\":[\"null\",{\"type\":\"long\",\"logicalType\":\"local-timestamp-millis\"}],\"default\":null},{\"name\":\"decimal\",\"type\":[\"null\",{\"type\":\"bytes\",\"logicalType\":\"decimal\",\"precision\":10,\"scale\":4}],\"default\":null}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"EventOne\",\"namespace\":\"com.example\",\"fields\":[{\"name\":\"id\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"sent\",\"type\":[\"null\",{\"type\":\"long\",\"logicalType\":\"local-timestamp-millis\"}],\"default\":null},{\"name\":\"text\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
   static {
     MODEL$.addLogicalTypeConversion(new org.apache.avro.data.TimeConversions.LocalTimestampMillisConversion());
-    MODEL$.addLogicalTypeConversion(new org.apache.avro.Conversions.DecimalConversion());
   }
 
   private static final BinaryMessageEncoder<EventOne> ENCODER =
@@ -78,9 +77,8 @@ public class EventOne extends org.apache.avro.specific.SpecificRecordBase implem
   }
 
   private java.lang.String id;
-  private java.lang.String description;
-  private java.time.LocalDateTime timestamp;
-  private java.math.BigDecimal decimal;
+  private java.time.LocalDateTime sent;
+  private java.lang.String text;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -92,15 +90,13 @@ public class EventOne extends org.apache.avro.specific.SpecificRecordBase implem
   /**
    * All-args constructor.
    * @param id The new value for id
-   * @param description The new value for description
-   * @param timestamp The new value for timestamp
-   * @param decimal The new value for decimal
+   * @param sent The new value for sent
+   * @param text The new value for text
    */
-  public EventOne(java.lang.String id, java.lang.String description, java.time.LocalDateTime timestamp, java.math.BigDecimal decimal) {
+  public EventOne(java.lang.String id, java.time.LocalDateTime sent, java.lang.String text) {
     this.id = id;
-    this.description = description;
-    this.timestamp = timestamp;
-    this.decimal = decimal;
+    this.sent = sent;
+    this.text = text;
   }
 
   @Override
@@ -114,9 +110,8 @@ public class EventOne extends org.apache.avro.specific.SpecificRecordBase implem
   public java.lang.Object get(int field$) {
     switch (field$) {
     case 0: return id;
-    case 1: return description;
-    case 2: return timestamp;
-    case 3: return decimal;
+    case 1: return sent;
+    case 2: return text;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -127,9 +122,8 @@ public class EventOne extends org.apache.avro.specific.SpecificRecordBase implem
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
     case 0: id = value$ != null ? value$.toString() : null; break;
-    case 1: description = value$ != null ? value$.toString() : null; break;
-    case 2: timestamp = (java.time.LocalDateTime)value$; break;
-    case 3: decimal = (java.math.BigDecimal)value$; break;
+    case 1: sent = (java.time.LocalDateTime)value$; break;
+    case 2: text = value$ != null ? value$.toString() : null; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -152,54 +146,37 @@ public class EventOne extends org.apache.avro.specific.SpecificRecordBase implem
   }
 
   /**
-   * Gets the value of the 'description' field.
-   * @return The value of the 'description' field.
+   * Gets the value of the 'sent' field.
+   * @return The value of the 'sent' field.
    */
-  public java.lang.String getDescription() {
-    return description;
+  public java.time.LocalDateTime getSent() {
+    return sent;
   }
 
 
   /**
-   * Sets the value of the 'description' field.
+   * Sets the value of the 'sent' field.
    * @param value the value to set.
    */
-  public void setDescription(java.lang.String value) {
-    this.description = value;
+  public void setSent(java.time.LocalDateTime value) {
+    this.sent = value;
   }
 
   /**
-   * Gets the value of the 'timestamp' field.
-   * @return The value of the 'timestamp' field.
+   * Gets the value of the 'text' field.
+   * @return The value of the 'text' field.
    */
-  public java.time.LocalDateTime getTimestamp() {
-    return timestamp;
+  public java.lang.String getText() {
+    return text;
   }
 
 
   /**
-   * Sets the value of the 'timestamp' field.
+   * Sets the value of the 'text' field.
    * @param value the value to set.
    */
-  public void setTimestamp(java.time.LocalDateTime value) {
-    this.timestamp = value;
-  }
-
-  /**
-   * Gets the value of the 'decimal' field.
-   * @return The value of the 'decimal' field.
-   */
-  public java.math.BigDecimal getDecimal() {
-    return decimal;
-  }
-
-
-  /**
-   * Sets the value of the 'decimal' field.
-   * @param value the value to set.
-   */
-  public void setDecimal(java.math.BigDecimal value) {
-    this.decimal = value;
+  public void setText(java.lang.String value) {
+    this.text = value;
   }
 
   /**
@@ -244,9 +221,8 @@ public class EventOne extends org.apache.avro.specific.SpecificRecordBase implem
     implements org.apache.avro.data.RecordBuilder<EventOne> {
 
     private java.lang.String id;
-    private java.lang.String description;
-    private java.time.LocalDateTime timestamp;
-    private java.math.BigDecimal decimal;
+    private java.time.LocalDateTime sent;
+    private java.lang.String text;
 
     /** Creates a new Builder */
     private Builder() {
@@ -263,17 +239,13 @@ public class EventOne extends org.apache.avro.specific.SpecificRecordBase implem
         this.id = data().deepCopy(fields()[0].schema(), other.id);
         fieldSetFlags()[0] = other.fieldSetFlags()[0];
       }
-      if (isValidValue(fields()[1], other.description)) {
-        this.description = data().deepCopy(fields()[1].schema(), other.description);
+      if (isValidValue(fields()[1], other.sent)) {
+        this.sent = data().deepCopy(fields()[1].schema(), other.sent);
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
       }
-      if (isValidValue(fields()[2], other.timestamp)) {
-        this.timestamp = data().deepCopy(fields()[2].schema(), other.timestamp);
+      if (isValidValue(fields()[2], other.text)) {
+        this.text = data().deepCopy(fields()[2].schema(), other.text);
         fieldSetFlags()[2] = other.fieldSetFlags()[2];
-      }
-      if (isValidValue(fields()[3], other.decimal)) {
-        this.decimal = data().deepCopy(fields()[3].schema(), other.decimal);
-        fieldSetFlags()[3] = other.fieldSetFlags()[3];
       }
     }
 
@@ -287,17 +259,13 @@ public class EventOne extends org.apache.avro.specific.SpecificRecordBase implem
         this.id = data().deepCopy(fields()[0].schema(), other.id);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.description)) {
-        this.description = data().deepCopy(fields()[1].schema(), other.description);
+      if (isValidValue(fields()[1], other.sent)) {
+        this.sent = data().deepCopy(fields()[1].schema(), other.sent);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.timestamp)) {
-        this.timestamp = data().deepCopy(fields()[2].schema(), other.timestamp);
+      if (isValidValue(fields()[2], other.text)) {
+        this.text = data().deepCopy(fields()[2].schema(), other.text);
         fieldSetFlags()[2] = true;
-      }
-      if (isValidValue(fields()[3], other.decimal)) {
-        this.decimal = data().deepCopy(fields()[3].schema(), other.decimal);
-        fieldSetFlags()[3] = true;
       }
     }
 
@@ -342,122 +310,82 @@ public class EventOne extends org.apache.avro.specific.SpecificRecordBase implem
     }
 
     /**
-      * Gets the value of the 'description' field.
+      * Gets the value of the 'sent' field.
       * @return The value.
       */
-    public java.lang.String getDescription() {
-      return description;
+    public java.time.LocalDateTime getSent() {
+      return sent;
     }
 
 
     /**
-      * Sets the value of the 'description' field.
-      * @param value The value of 'description'.
+      * Sets the value of the 'sent' field.
+      * @param value The value of 'sent'.
       * @return This builder.
       */
-    public com.example.EventOne.Builder setDescription(java.lang.String value) {
+    public com.example.EventOne.Builder setSent(java.time.LocalDateTime value) {
       validate(fields()[1], value);
-      this.description = value;
+      this.sent = value;
       fieldSetFlags()[1] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'description' field has been set.
-      * @return True if the 'description' field has been set, false otherwise.
+      * Checks whether the 'sent' field has been set.
+      * @return True if the 'sent' field has been set, false otherwise.
       */
-    public boolean hasDescription() {
+    public boolean hasSent() {
       return fieldSetFlags()[1];
     }
 
 
     /**
-      * Clears the value of the 'description' field.
+      * Clears the value of the 'sent' field.
       * @return This builder.
       */
-    public com.example.EventOne.Builder clearDescription() {
-      description = null;
+    public com.example.EventOne.Builder clearSent() {
+      sent = null;
       fieldSetFlags()[1] = false;
       return this;
     }
 
     /**
-      * Gets the value of the 'timestamp' field.
+      * Gets the value of the 'text' field.
       * @return The value.
       */
-    public java.time.LocalDateTime getTimestamp() {
-      return timestamp;
+    public java.lang.String getText() {
+      return text;
     }
 
 
     /**
-      * Sets the value of the 'timestamp' field.
-      * @param value The value of 'timestamp'.
+      * Sets the value of the 'text' field.
+      * @param value The value of 'text'.
       * @return This builder.
       */
-    public com.example.EventOne.Builder setTimestamp(java.time.LocalDateTime value) {
+    public com.example.EventOne.Builder setText(java.lang.String value) {
       validate(fields()[2], value);
-      this.timestamp = value;
+      this.text = value;
       fieldSetFlags()[2] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'timestamp' field has been set.
-      * @return True if the 'timestamp' field has been set, false otherwise.
+      * Checks whether the 'text' field has been set.
+      * @return True if the 'text' field has been set, false otherwise.
       */
-    public boolean hasTimestamp() {
+    public boolean hasText() {
       return fieldSetFlags()[2];
     }
 
 
     /**
-      * Clears the value of the 'timestamp' field.
+      * Clears the value of the 'text' field.
       * @return This builder.
       */
-    public com.example.EventOne.Builder clearTimestamp() {
-      timestamp = null;
+    public com.example.EventOne.Builder clearText() {
+      text = null;
       fieldSetFlags()[2] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'decimal' field.
-      * @return The value.
-      */
-    public java.math.BigDecimal getDecimal() {
-      return decimal;
-    }
-
-
-    /**
-      * Sets the value of the 'decimal' field.
-      * @param value The value of 'decimal'.
-      * @return This builder.
-      */
-    public com.example.EventOne.Builder setDecimal(java.math.BigDecimal value) {
-      validate(fields()[3], value);
-      this.decimal = value;
-      fieldSetFlags()[3] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'decimal' field has been set.
-      * @return True if the 'decimal' field has been set, false otherwise.
-      */
-    public boolean hasDecimal() {
-      return fieldSetFlags()[3];
-    }
-
-
-    /**
-      * Clears the value of the 'decimal' field.
-      * @return This builder.
-      */
-    public com.example.EventOne.Builder clearDecimal() {
-      decimal = null;
-      fieldSetFlags()[3] = false;
       return this;
     }
 
@@ -467,9 +395,8 @@ public class EventOne extends org.apache.avro.specific.SpecificRecordBase implem
       try {
         EventOne record = new EventOne();
         record.id = fieldSetFlags()[0] ? this.id : (java.lang.String) defaultValue(fields()[0]);
-        record.description = fieldSetFlags()[1] ? this.description : (java.lang.String) defaultValue(fields()[1]);
-        record.timestamp = fieldSetFlags()[2] ? this.timestamp : (java.time.LocalDateTime) defaultValue(fields()[2]);
-        record.decimal = fieldSetFlags()[3] ? this.decimal : (java.math.BigDecimal) defaultValue(fields()[3]);
+        record.sent = fieldSetFlags()[1] ? this.sent : (java.time.LocalDateTime) defaultValue(fields()[1]);
+        record.text = fieldSetFlags()[2] ? this.text : (java.lang.String) defaultValue(fields()[2]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;

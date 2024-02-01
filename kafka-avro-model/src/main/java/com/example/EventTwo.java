@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -4763589279066900781L;
+  private static final long serialVersionUID = 1151070356526880899L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"EventTwo\",\"namespace\":\"com.example\",\"fields\":[{\"name\":\"id2\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"description2\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"timestamp2\",\"type\":[\"null\",{\"type\":\"long\",\"logicalType\":\"local-timestamp-millis\"}],\"default\":null},{\"name\":\"decimal2\",\"type\":[\"null\",{\"type\":\"bytes\",\"logicalType\":\"decimal\",\"precision\":10,\"scale\":4}],\"default\":null}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"EventTwo\",\"namespace\":\"com.example\",\"fields\":[{\"name\":\"id\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"sent\",\"type\":[\"null\",{\"type\":\"long\",\"logicalType\":\"local-timestamp-millis\"}],\"default\":null},{\"name\":\"amount\",\"type\":[\"null\",{\"type\":\"bytes\",\"logicalType\":\"decimal\",\"precision\":10,\"scale\":4}],\"default\":null}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -77,10 +77,9 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
     return DECODER.decode(b);
   }
 
-  private java.lang.String id2;
-  private java.lang.String description2;
-  private java.time.LocalDateTime timestamp2;
-  private java.math.BigDecimal decimal2;
+  private java.lang.String id;
+  private java.time.LocalDateTime sent;
+  private java.math.BigDecimal amount;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -91,16 +90,14 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
 
   /**
    * All-args constructor.
-   * @param id2 The new value for id2
-   * @param description2 The new value for description2
-   * @param timestamp2 The new value for timestamp2
-   * @param decimal2 The new value for decimal2
+   * @param id The new value for id
+   * @param sent The new value for sent
+   * @param amount The new value for amount
    */
-  public EventTwo(java.lang.String id2, java.lang.String description2, java.time.LocalDateTime timestamp2, java.math.BigDecimal decimal2) {
-    this.id2 = id2;
-    this.description2 = description2;
-    this.timestamp2 = timestamp2;
-    this.decimal2 = decimal2;
+  public EventTwo(java.lang.String id, java.time.LocalDateTime sent, java.math.BigDecimal amount) {
+    this.id = id;
+    this.sent = sent;
+    this.amount = amount;
   }
 
   @Override
@@ -113,10 +110,9 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
   @Override
   public java.lang.Object get(int field$) {
     switch (field$) {
-    case 0: return id2;
-    case 1: return description2;
-    case 2: return timestamp2;
-    case 3: return decimal2;
+    case 0: return id;
+    case 1: return sent;
+    case 2: return amount;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -126,80 +122,62 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: id2 = value$ != null ? value$.toString() : null; break;
-    case 1: description2 = value$ != null ? value$.toString() : null; break;
-    case 2: timestamp2 = (java.time.LocalDateTime)value$; break;
-    case 3: decimal2 = (java.math.BigDecimal)value$; break;
+    case 0: id = value$ != null ? value$.toString() : null; break;
+    case 1: sent = (java.time.LocalDateTime)value$; break;
+    case 2: amount = (java.math.BigDecimal)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
 
   /**
-   * Gets the value of the 'id2' field.
-   * @return The value of the 'id2' field.
+   * Gets the value of the 'id' field.
+   * @return The value of the 'id' field.
    */
-  public java.lang.String getId2() {
-    return id2;
+  public java.lang.String getId() {
+    return id;
   }
 
 
   /**
-   * Sets the value of the 'id2' field.
+   * Sets the value of the 'id' field.
    * @param value the value to set.
    */
-  public void setId2(java.lang.String value) {
-    this.id2 = value;
+  public void setId(java.lang.String value) {
+    this.id = value;
   }
 
   /**
-   * Gets the value of the 'description2' field.
-   * @return The value of the 'description2' field.
+   * Gets the value of the 'sent' field.
+   * @return The value of the 'sent' field.
    */
-  public java.lang.String getDescription2() {
-    return description2;
+  public java.time.LocalDateTime getSent() {
+    return sent;
   }
 
 
   /**
-   * Sets the value of the 'description2' field.
+   * Sets the value of the 'sent' field.
    * @param value the value to set.
    */
-  public void setDescription2(java.lang.String value) {
-    this.description2 = value;
+  public void setSent(java.time.LocalDateTime value) {
+    this.sent = value;
   }
 
   /**
-   * Gets the value of the 'timestamp2' field.
-   * @return The value of the 'timestamp2' field.
+   * Gets the value of the 'amount' field.
+   * @return The value of the 'amount' field.
    */
-  public java.time.LocalDateTime getTimestamp2() {
-    return timestamp2;
+  public java.math.BigDecimal getAmount() {
+    return amount;
   }
 
 
   /**
-   * Sets the value of the 'timestamp2' field.
+   * Sets the value of the 'amount' field.
    * @param value the value to set.
    */
-  public void setTimestamp2(java.time.LocalDateTime value) {
-    this.timestamp2 = value;
-  }
-
-  /**
-   * Gets the value of the 'decimal2' field.
-   * @return The value of the 'decimal2' field.
-   */
-  public java.math.BigDecimal getDecimal2() {
-    return decimal2;
-  }
-
-
-  /**
-   * Sets the value of the 'decimal2' field.
-   * @param value the value to set.
-   */
-  public void setDecimal2(java.math.BigDecimal value) {
-    this.decimal2 = value;
+  public void setAmount(java.math.BigDecimal value) {
+    this.amount = value;
   }
 
   /**
@@ -243,10 +221,9 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<EventTwo>
     implements org.apache.avro.data.RecordBuilder<EventTwo> {
 
-    private java.lang.String id2;
-    private java.lang.String description2;
-    private java.time.LocalDateTime timestamp2;
-    private java.math.BigDecimal decimal2;
+    private java.lang.String id;
+    private java.time.LocalDateTime sent;
+    private java.math.BigDecimal amount;
 
     /** Creates a new Builder */
     private Builder() {
@@ -259,21 +236,17 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
      */
     private Builder(com.example.EventTwo.Builder other) {
       super(other);
-      if (isValidValue(fields()[0], other.id2)) {
-        this.id2 = data().deepCopy(fields()[0].schema(), other.id2);
+      if (isValidValue(fields()[0], other.id)) {
+        this.id = data().deepCopy(fields()[0].schema(), other.id);
         fieldSetFlags()[0] = other.fieldSetFlags()[0];
       }
-      if (isValidValue(fields()[1], other.description2)) {
-        this.description2 = data().deepCopy(fields()[1].schema(), other.description2);
+      if (isValidValue(fields()[1], other.sent)) {
+        this.sent = data().deepCopy(fields()[1].schema(), other.sent);
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
       }
-      if (isValidValue(fields()[2], other.timestamp2)) {
-        this.timestamp2 = data().deepCopy(fields()[2].schema(), other.timestamp2);
+      if (isValidValue(fields()[2], other.amount)) {
+        this.amount = data().deepCopy(fields()[2].schema(), other.amount);
         fieldSetFlags()[2] = other.fieldSetFlags()[2];
-      }
-      if (isValidValue(fields()[3], other.decimal2)) {
-        this.decimal2 = data().deepCopy(fields()[3].schema(), other.decimal2);
-        fieldSetFlags()[3] = other.fieldSetFlags()[3];
       }
     }
 
@@ -283,181 +256,137 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
      */
     private Builder(com.example.EventTwo other) {
       super(SCHEMA$, MODEL$);
-      if (isValidValue(fields()[0], other.id2)) {
-        this.id2 = data().deepCopy(fields()[0].schema(), other.id2);
+      if (isValidValue(fields()[0], other.id)) {
+        this.id = data().deepCopy(fields()[0].schema(), other.id);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.description2)) {
-        this.description2 = data().deepCopy(fields()[1].schema(), other.description2);
+      if (isValidValue(fields()[1], other.sent)) {
+        this.sent = data().deepCopy(fields()[1].schema(), other.sent);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.timestamp2)) {
-        this.timestamp2 = data().deepCopy(fields()[2].schema(), other.timestamp2);
+      if (isValidValue(fields()[2], other.amount)) {
+        this.amount = data().deepCopy(fields()[2].schema(), other.amount);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.decimal2)) {
-        this.decimal2 = data().deepCopy(fields()[3].schema(), other.decimal2);
-        fieldSetFlags()[3] = true;
-      }
     }
 
     /**
-      * Gets the value of the 'id2' field.
+      * Gets the value of the 'id' field.
       * @return The value.
       */
-    public java.lang.String getId2() {
-      return id2;
+    public java.lang.String getId() {
+      return id;
     }
 
 
     /**
-      * Sets the value of the 'id2' field.
-      * @param value The value of 'id2'.
+      * Sets the value of the 'id' field.
+      * @param value The value of 'id'.
       * @return This builder.
       */
-    public com.example.EventTwo.Builder setId2(java.lang.String value) {
+    public com.example.EventTwo.Builder setId(java.lang.String value) {
       validate(fields()[0], value);
-      this.id2 = value;
+      this.id = value;
       fieldSetFlags()[0] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'id2' field has been set.
-      * @return True if the 'id2' field has been set, false otherwise.
+      * Checks whether the 'id' field has been set.
+      * @return True if the 'id' field has been set, false otherwise.
       */
-    public boolean hasId2() {
+    public boolean hasId() {
       return fieldSetFlags()[0];
     }
 
 
     /**
-      * Clears the value of the 'id2' field.
+      * Clears the value of the 'id' field.
       * @return This builder.
       */
-    public com.example.EventTwo.Builder clearId2() {
-      id2 = null;
+    public com.example.EventTwo.Builder clearId() {
+      id = null;
       fieldSetFlags()[0] = false;
       return this;
     }
 
     /**
-      * Gets the value of the 'description2' field.
+      * Gets the value of the 'sent' field.
       * @return The value.
       */
-    public java.lang.String getDescription2() {
-      return description2;
+    public java.time.LocalDateTime getSent() {
+      return sent;
     }
 
 
     /**
-      * Sets the value of the 'description2' field.
-      * @param value The value of 'description2'.
+      * Sets the value of the 'sent' field.
+      * @param value The value of 'sent'.
       * @return This builder.
       */
-    public com.example.EventTwo.Builder setDescription2(java.lang.String value) {
+    public com.example.EventTwo.Builder setSent(java.time.LocalDateTime value) {
       validate(fields()[1], value);
-      this.description2 = value;
+      this.sent = value;
       fieldSetFlags()[1] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'description2' field has been set.
-      * @return True if the 'description2' field has been set, false otherwise.
+      * Checks whether the 'sent' field has been set.
+      * @return True if the 'sent' field has been set, false otherwise.
       */
-    public boolean hasDescription2() {
+    public boolean hasSent() {
       return fieldSetFlags()[1];
     }
 
 
     /**
-      * Clears the value of the 'description2' field.
+      * Clears the value of the 'sent' field.
       * @return This builder.
       */
-    public com.example.EventTwo.Builder clearDescription2() {
-      description2 = null;
+    public com.example.EventTwo.Builder clearSent() {
+      sent = null;
       fieldSetFlags()[1] = false;
       return this;
     }
 
     /**
-      * Gets the value of the 'timestamp2' field.
+      * Gets the value of the 'amount' field.
       * @return The value.
       */
-    public java.time.LocalDateTime getTimestamp2() {
-      return timestamp2;
+    public java.math.BigDecimal getAmount() {
+      return amount;
     }
 
 
     /**
-      * Sets the value of the 'timestamp2' field.
-      * @param value The value of 'timestamp2'.
+      * Sets the value of the 'amount' field.
+      * @param value The value of 'amount'.
       * @return This builder.
       */
-    public com.example.EventTwo.Builder setTimestamp2(java.time.LocalDateTime value) {
+    public com.example.EventTwo.Builder setAmount(java.math.BigDecimal value) {
       validate(fields()[2], value);
-      this.timestamp2 = value;
+      this.amount = value;
       fieldSetFlags()[2] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'timestamp2' field has been set.
-      * @return True if the 'timestamp2' field has been set, false otherwise.
+      * Checks whether the 'amount' field has been set.
+      * @return True if the 'amount' field has been set, false otherwise.
       */
-    public boolean hasTimestamp2() {
+    public boolean hasAmount() {
       return fieldSetFlags()[2];
     }
 
 
     /**
-      * Clears the value of the 'timestamp2' field.
+      * Clears the value of the 'amount' field.
       * @return This builder.
       */
-    public com.example.EventTwo.Builder clearTimestamp2() {
-      timestamp2 = null;
+    public com.example.EventTwo.Builder clearAmount() {
+      amount = null;
       fieldSetFlags()[2] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'decimal2' field.
-      * @return The value.
-      */
-    public java.math.BigDecimal getDecimal2() {
-      return decimal2;
-    }
-
-
-    /**
-      * Sets the value of the 'decimal2' field.
-      * @param value The value of 'decimal2'.
-      * @return This builder.
-      */
-    public com.example.EventTwo.Builder setDecimal2(java.math.BigDecimal value) {
-      validate(fields()[3], value);
-      this.decimal2 = value;
-      fieldSetFlags()[3] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'decimal2' field has been set.
-      * @return True if the 'decimal2' field has been set, false otherwise.
-      */
-    public boolean hasDecimal2() {
-      return fieldSetFlags()[3];
-    }
-
-
-    /**
-      * Clears the value of the 'decimal2' field.
-      * @return This builder.
-      */
-    public com.example.EventTwo.Builder clearDecimal2() {
-      decimal2 = null;
-      fieldSetFlags()[3] = false;
       return this;
     }
 
@@ -466,10 +395,9 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
     public EventTwo build() {
       try {
         EventTwo record = new EventTwo();
-        record.id2 = fieldSetFlags()[0] ? this.id2 : (java.lang.String) defaultValue(fields()[0]);
-        record.description2 = fieldSetFlags()[1] ? this.description2 : (java.lang.String) defaultValue(fields()[1]);
-        record.timestamp2 = fieldSetFlags()[2] ? this.timestamp2 : (java.time.LocalDateTime) defaultValue(fields()[2]);
-        record.decimal2 = fieldSetFlags()[3] ? this.decimal2 : (java.math.BigDecimal) defaultValue(fields()[3]);
+        record.id = fieldSetFlags()[0] ? this.id : (java.lang.String) defaultValue(fields()[0]);
+        record.sent = fieldSetFlags()[1] ? this.sent : (java.time.LocalDateTime) defaultValue(fields()[1]);
+        record.amount = fieldSetFlags()[2] ? this.amount : (java.math.BigDecimal) defaultValue(fields()[2]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
