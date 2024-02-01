@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>kafka-avro-model</artifactId>
+    <version>0.0.1</version>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <avro.version>1.11.3</avro.version>
+        <confluent.version>7.5.1</confluent.version>
+
+        <schema.registry.url>http://kafka-tools.local:8081</schema.registry.url>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>confluent</id>
+            <url>https://packages.confluent.io/maven/</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>confluent</id>
+            <url>https://packages.confluent.io/maven/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.confluent</groupId>
+            <artifactId>kafka-avro-serializer</artifactId>
+            <version>${confluent.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.avro</groupId>
+                <artifactId>avro-maven-plugin</artifactId>
+                <version>${avro.version}</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>schema</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDirectory>${project.basedir}/src/main/avro/</sourceDirectory>
+                            <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+                            <stringType>String</stringType>
+                            <enableDecimalLogicalType>true</enableDecimalLogicalType>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>io.confluent</groupId>
+                <artifactId>kafka-schema-registry-maven-plugin</artifactId>
+                <version>${confluent.version}</version>
+                <configuration>
+                    <schemaRegistryUrls>
+                        <param>${schema.registry.url}</param>
+                    </schemaRegistryUrls>
+                    <subjects>
+                        <multi-event-value>src/main/avro/multi-event.avsc</multi-event-value>
+                        <event-one-value>src/main/avro/event-one.avsc</event-one-value>
+                        <evnet-two-value>src/main/avro/event-two.avsc</evnet-two-value>
+                    </subjects>
+                    <schemaTypes>
+                        <multi-event-value>AVRO</multi-event-value>
+                        <event-one-value>AVRO</event-one-value>
+                        <event-two-value>AVRO</event-two-value>
+                    </schemaTypes>
+                    <references>
+                        <multi-event-value>
+                            <reference>
+                                <name>com.example.EventOne</name>
+                                <subject>event-one-value</subject>
+                            </reference>
+                            <reference>
+                                <name>com.example.EventTwo</name>
+                                <subject>event-two-value</subject>
+                            </reference>
+                        </multi-event-value>
+                    </references>
+                </configuration>
+                <goals>
+                    <goal>register</goal>
+                </goals>
+            </plugin>
+        </plugins>
+    </build>
+</project>
