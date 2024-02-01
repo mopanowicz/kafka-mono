@@ -72,23 +72,23 @@
                     </schemaRegistryUrls>
                     <subjects>
                         <multi-event-value>src/main/avro/multi-event.avsc</multi-event-value>
-                        <event-one-value>src/main/avro/event-one.avsc</event-one-value>
-                        <evnet-two-value>src/main/avro/event-two.avsc</evnet-two-value>
+                        <event-one>src/main/avro/event-one.avsc</event-one>
+                        <event-two>src/main/avro/event-two.avsc</event-two>
                     </subjects>
                     <schemaTypes>
                         <multi-event-value>AVRO</multi-event-value>
-                        <event-one-value>AVRO</event-one-value>
-                        <event-two-value>AVRO</event-two-value>
+                        <event-one>AVRO</event-one>
+                        <event-two>AVRO</event-two>
                     </schemaTypes>
                     <references>
                         <multi-event-value>
                             <reference>
                                 <name>com.example.EventOne</name>
-                                <subject>event-one-value</subject>
+                                <subject>event-one</subject>
                             </reference>
                             <reference>
                                 <name>com.example.EventTwo</name>
-                                <subject>event-two-value</subject>
+                                <subject>event-two</subject>
                             </reference>
                         </multi-event-value>
                     </references>
