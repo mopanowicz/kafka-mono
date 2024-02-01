@@ -1,5 +1,6 @@
 package com.example;
 
+import io.confluent.kafka.serializers.AbstractKafkaSchemaSerDeConfig;
 import io.confluent.kafka.serializers.KafkaAvroDeserializerConfig;
 import org.apache.kafka.clients.consumer.*;
 import org.slf4j.Logger;
@@ -22,9 +23,9 @@ public class KafkaAvroReflectionConsumerApplication implements CommandLineRunner
 		SpringApplication.run(KafkaAvroReflectionConsumerApplication.class, args);
 	}
 
-	@Value("${bootstrap.servers:localhost:9092}")
+	@Value("${bootstrap.servers}")
 	String bootstrapServers;
-	@Value("${schema.registry.url:http://localhost:8081}")
+	@Value("${schema.registry.url}")
 	String schemaRegistryUrl;
 	@Value("${messages.topic}")
 	String messagesTopic;
@@ -39,7 +40,7 @@ public class KafkaAvroReflectionConsumerApplication implements CommandLineRunner
 		props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, org.apache.kafka.common.serialization.StringDeserializer.class);
 		props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, io.confluent.kafka.streams.serdes.avro.ReflectionAvroDeserializer.class);
 		props.put(KafkaAvroDeserializerConfig.AVRO_REFLECTION_ALLOW_NULL_CONFIG, true);
-		props.put(KafkaAvroDeserializerConfig.SCHEMA_REGISTRY_URL_CONFIG, schemaRegistryUrl);
+		props.put(AbstractKafkaSchemaSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, schemaRegistryUrl);
 
 		props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 
