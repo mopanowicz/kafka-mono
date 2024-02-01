@@ -71,7 +71,7 @@
                         <param>${schema.registry.url}</param>
                     </schemaRegistryUrls>
                     <subjects>
-                        <multi-event-value>src/main/avro/multi-event.avsc</multi-event-value>
+                        <multi-event-value>src/main/avro/multi-event.avsx</multi-event-value>
                         <event-one>src/main/avro/event-one.avsc</event-one>
                         <event-two>src/main/avro/event-two.avsc</event-two>
                     </subjects>
