@@ -1,3 +1,13 @@
 # notes
 
-https://www.confluent.io/blog/multiple-event-types-in-the-same-kafka-topic/
+Generate source code
+
+```
+mvn generate-sources
+```
+
+Register schemas configured in pom.xml
+
+```
+mvn schema-registry:register
+```

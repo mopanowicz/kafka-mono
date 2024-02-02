@@ -1,0 +1,28 @@
+server.port: 8084
+
+management:
+  endpoints:
+    web.exposure.include: "*"
+    jmx.exposure.include: "*"
+
+logging:
+  level:
+    root: info
+    com.example: debug
+
+event-consumer:
+  #  event-topic: multi-event
+  event-one-topic: event-one
+  event-two-topic: event-two
+  properties:
+    group.id: spring-group-1
+    bootstrap.servers: kafka.local:9092
+    schema.registry.url: http://kafka-tools.local:8081
+    key.deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+    value.deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+    spring.deserializer.key.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
+    spring.deserializer.value.delegate.class: io.confluent.kafka.serializers.KafkaAvroDeserializer
+    avro.reflection.allow.null: true
+    avro.use.logical.type.converters: true
+  #    auto.register.schemas: false
+  #    use.latest.version: true

@@ -1,0 +1,25 @@
+server.port: 8082
+
+management:
+  endpoints:
+    web.exposure.include: "*"
+    jmx.exposure.include: "*"
+
+logging:
+  level:
+    root: info
+    com.example: debug
+
+event-producer:
+#  event-topic: multi-event
+  event-one-topic: event-one
+  event-two-topic: event-two
+  properties:
+    bootstrap.servers: kafka.local:9092
+    schema.registry.url: http://kafka-tools.local:8081
+    key.serializer: org.apache.kafka.common.serialization.StringSerializer
+    value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+    avro.reflection.allow.null: true
+    avro.use.logical.type.converters: true
+#    auto.register.schemas: false
+#    use.latest.version: true
