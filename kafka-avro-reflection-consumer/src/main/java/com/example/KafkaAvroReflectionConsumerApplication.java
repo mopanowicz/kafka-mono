@@ -44,14 +44,14 @@ public class KafkaAvroReflectionConsumerApplication implements CommandLineRunner
 
 		props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 
-		final Consumer<String, AvroMessage> consumer = new KafkaConsumer<>(props);
+		final Consumer<String, Object> consumer = new KafkaConsumer<>(props);
 
         try (consumer) {
             consumer.subscribe(Collections.singletonList(messagesTopic));
             while (true) {
-                ConsumerRecords<String, AvroMessage> messages = consumer.poll(Duration.ofMillis(100));
-                for (ConsumerRecord<String, AvroMessage> avroMessage : messages) {
-                    log.info("offset = {}, key = {}, value = {}", avroMessage.offset(), avroMessage.key(), avroMessage.value());
+                ConsumerRecords<String, Object> messages = consumer.poll(Duration.ofMillis(100));
+                for (ConsumerRecord<String, Object> consumerRecord : messages) {
+                    log.info("offset = {} key = {} value class = {} value = {}", consumerRecord.offset(), consumerRecord.key(), consumerRecord.value().getClass().getName(), consumerRecord.value());
                 }
             }
         }

@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.event.Event;
 import io.confluent.kafka.serializers.AbstractKafkaSchemaSerDeConfig;
 import io.confluent.kafka.serializers.KafkaAvroSerializerConfig;
 import org.apache.kafka.clients.producer.KafkaProducer;
@@ -46,16 +47,16 @@ public class KafkaAvroReflectionProducerApplication implements CommandLineRunner
 		props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, io.confluent.kafka.streams.serdes.avro.ReflectionAvroSerializer.class);
 		props.put(KafkaAvroSerializerConfig.AVRO_REFLECTION_ALLOW_NULL_CONFIG, true);
 		props.put(AbstractKafkaSchemaSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, schemaRegistryUrl);
-		KafkaProducer<String, AvroMessage> producer = new KafkaProducer<>(props);
+		KafkaProducer<String, Object> producer = new KafkaProducer<>(props);
 
 		String key = "reflection-key-1";
-		AvroMessage avroMessage = new AvroMessage();
-		avroMessage.setText("reflection-value-" + random.nextInt());
-		avroMessage.setAmount(BigDecimal.valueOf(random.nextDouble()).setScale(4, RoundingMode.HALF_EVEN));
-		avroMessage.setDate(Date.from(Instant.now()));
-		avroMessage.setTimestamp(Timestamp.from(Instant.now()));
+		Event event = Event.builder()
+				.text("reflection-value-" + random.nextInt())
+				.amount(BigDecimal.valueOf(random.nextDouble()).setScale(4, RoundingMode.HALF_EVEN))
+				.date(Date.from(Instant.now()))
+				.build();
 
-		ProducerRecord<String, AvroMessage> producerRecord = new ProducerRecord<>(messagesTopic, key, avroMessage);
+		ProducerRecord<String, Object> producerRecord = new ProducerRecord<>(messagesTopic, key, event);
 		try {
 			log.info("sending {}", producerRecord);
 			producer.send(producerRecord);
