@@ -26,3 +26,10 @@ event-consumer:
     avro.use.logical.type.converters: true
   #    auto.register.schemas: false
   #    use.latest.version: true
+
+dlt-producer:
+  properties:
+    bootstrap.servers: kafka.local:9092
+    schema.registry.url: http://kafka-tools.local:8081
+    key.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+    value.serializer: org.apache.kafka.common.serialization.ByteArraySerializer

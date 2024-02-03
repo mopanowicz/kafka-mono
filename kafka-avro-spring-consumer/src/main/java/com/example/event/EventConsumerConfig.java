@@ -7,9 +7,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.listener.CommonErrorHandler;
 import org.springframework.kafka.listener.ContainerProperties;
+import org.springframework.kafka.listener.DeadLetterPublishingRecoverer;
+import org.springframework.kafka.listener.DefaultErrorHandler;
 import org.springframework.util.StringUtils;
+import org.springframework.util.backoff.FixedBackOff;
 
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -23,7 +27,10 @@ class EventConsumerConfig {
     Map<String, String> properties;
 
     @Bean
-    ConcurrentKafkaListenerContainerFactory<String, Object> eventListenerContainerFactory(CommonErrorHandler eventErrorHandler) {
+    ConcurrentKafkaListenerContainerFactory<String, Object> eventListenerContainerFactory(KafkaTemplate<Object, Object> dltTemplate) {
+        DeadLetterPublishingRecoverer recoverer = new DeadLetterPublishingRecoverer(dltTemplate);
+        recoverer.setLogRecoveryRecord(true);
+        CommonErrorHandler eventErrorHandler = new DefaultErrorHandler(recoverer, new FixedBackOff(10L, 3L));
         ConcurrentKafkaListenerContainerFactory<String, Object> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setCommonErrorHandler(eventErrorHandler);
         ContainerProperties containerProperties = factory.getContainerProperties();
