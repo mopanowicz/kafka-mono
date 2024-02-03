@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
+import org.springframework.kafka.listener.CommonErrorHandler;
 import org.springframework.kafka.listener.ContainerProperties;
 import org.springframework.util.StringUtils;
 
@@ -22,8 +23,9 @@ class EventConsumerConfig {
     Map<String, String> properties;
 
     @Bean
-    ConcurrentKafkaListenerContainerFactory<String, Object> eventListenerContainerFactory() {
+    ConcurrentKafkaListenerContainerFactory<String, Object> eventListenerContainerFactory(CommonErrorHandler eventErrorHandler) {
         ConcurrentKafkaListenerContainerFactory<String, Object> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setCommonErrorHandler(eventErrorHandler);
         ContainerProperties containerProperties = factory.getContainerProperties();
         containerProperties.setAckMode(ContainerProperties.AckMode.MANUAL);
         factory.setConsumerFactory(new DefaultKafkaConsumerFactory<>(properties.entrySet()
