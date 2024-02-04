@@ -17,7 +17,7 @@ import java.util.concurrent.ExecutionException;
 @Setter
 @Slf4j
 @RequiredArgsConstructor
-public class EventProducer {
+class EventProducer {
 
     private final KafkaTemplate<String, SpecificRecord> kafkaTemplate;
 

@@ -79,26 +79,42 @@
                         <param>${schema.registry.url}</param>
                     </schemaRegistryUrls>
                     <subjects>
-                        <multi-event-value>src/main/avro/multi-event.avsx</multi-event-value>
-                        <event-one>src/main/avro/event-one.avsc</event-one>
-                        <event-two>src/main/avro/event-two.avsc</event-two>
+                        <multi-simple-value>src/main/avro/multi-simple.avsx</multi-simple-value>
+                        <simple-one>src/main/avro/simple-one.avsc</simple-one>
+                        <simple-two>src/main/avro/simple-two.avsc</simple-two>
+                        <multi-logical-value>src/main/avro/multi-logical.avsx</multi-logical-value>
+                        <logical-one>src/main/avro/logical-one.avsc</logical-one>
+                        <logical-two>src/main/avro/logical-two.avsc</logical-two>
                     </subjects>
                     <schemaTypes>
-                        <multi-event-value>AVRO</multi-event-value>
-                        <event-one>AVRO</event-one>
-                        <event-two>AVRO</event-two>
+                        <multi-simple-value>AVRO</multi-simple-value>
+                        <simple-one>AVRO</simple-one>
+                        <simple-two>AVRO</simple-two>
+                        <multi-logical-value>AVRO</multi-logical-value>
+                        <logical-one>AVRO</logical-one>
+                        <logical-two>AVRO</logical-two>
                     </schemaTypes>
                     <references>
-                        <multi-event-value>
+                        <multi-simple-value>
                             <reference>
-                                <name>com.example.EventOne</name>
-                                <subject>event-one</subject>
+                                <name>com.example.event.SimpleOne</name>
+                                <subject>simple-one</subject>
                             </reference>
                             <reference>
-                                <name>com.example.EventTwo</name>
-                                <subject>event-two</subject>
+                                <name>com.example.event.SimpleTwo</name>
+                                <subject>simple-two</subject>
                             </reference>
-                        </multi-event-value>
+                        </multi-simple-value>
+                        <multi-logical-value>
+                            <reference>
+                                <name>com.example.event.LogicalOne</name>
+                                <subject>logical-one</subject>
+                            </reference>
+                            <reference>
+                                <name>com.example.event.LogicalTwo</name>
+                                <subject>logical-two</subject>
+                            </reference>
+                        </multi-logical-value>
                     </references>
                 </configuration>
                 <goals>

@@ -10,17 +10,17 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class EventConsumer {
+class EventConsumer {
 
-    @KafkaListener(topics = "${event-consumer.event-one-topic}", containerFactory = "eventListenerContainerFactory")
-    void receiveEventOne(ConsumerRecord<String, EventOne> consumerRecord, Acknowledgment acknowledgment) {
+    @KafkaListener(topics = "${event-consumer.topics.simple-one}", containerFactory = "eventListenerContainerFactory")
+    void receiveEventOne(ConsumerRecord<String, SimpleOne> consumerRecord, Acknowledgment acknowledgment) {
         log.debug("receive record={}", consumerRecord);
         // do something with the record
         acknowledgment.acknowledge();
     }
 
-    @KafkaListener(topics = "${event-consumer.event-two-topic}", containerFactory = "eventListenerContainerFactory")
-    void receiveEventTwo(ConsumerRecord<String, EventTwo> consumerRecord, Acknowledgment acknowledgment) {
+    @KafkaListener(topics = "${event-consumer.topics.simple-two}", containerFactory = "eventListenerContainerFactory")
+    void receiveEventTwo(ConsumerRecord<String, SimpleTwo> consumerRecord, Acknowledgment acknowledgment) {
         log.debug("receive record={}", consumerRecord);
         // do something with the record
         acknowledgment.acknowledge();

@@ -1,0 +1,27 @@
+{
+  "type": "record",
+  "namespace": "com.example.event",
+  "name": "SimpleTwo",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "sent",
+      "type": [
+        "null",
+        "long"
+      ],
+      "default": null
+    },
+    {
+      "name": "amount",
+      "type": [
+        "null",
+        "double"
+      ],
+      "default": null
+    }
+  ]
+}

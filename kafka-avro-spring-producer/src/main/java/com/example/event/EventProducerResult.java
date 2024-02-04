@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 class EventProducerResult {
+    String topic;
     String eventType;
     int numberOfEvents;
 }

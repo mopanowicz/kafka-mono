@@ -13,11 +13,11 @@ import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
-public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 5211794249935314673L;
+public class LogicalTwo extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
+  private static final long serialVersionUID = 5290679093773501019L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"EventTwo\",\"namespace\":\"com.example.event\",\"fields\":[{\"name\":\"id\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"sent\",\"type\":[\"null\",{\"type\":\"long\",\"logicalType\":\"local-timestamp-millis\"}],\"default\":null},{\"name\":\"amount\",\"type\":[\"null\",{\"type\":\"bytes\",\"logicalType\":\"decimal\",\"precision\":10,\"scale\":4}],\"default\":null}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"LogicalTwo\",\"namespace\":\"com.example.event\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"sent\",\"type\":[\"null\",{\"type\":\"long\",\"logicalType\":\"local-timestamp-millis\"}],\"default\":null},{\"name\":\"amount\",\"type\":[\"null\",{\"type\":\"bytes\",\"logicalType\":\"decimal\",\"precision\":10,\"scale\":4}],\"default\":null}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -26,17 +26,17 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
     MODEL$.addLogicalTypeConversion(new org.apache.avro.Conversions.DecimalConversion());
   }
 
-  private static final BinaryMessageEncoder<EventTwo> ENCODER =
+  private static final BinaryMessageEncoder<LogicalTwo> ENCODER =
       new BinaryMessageEncoder<>(MODEL$, SCHEMA$);
 
-  private static final BinaryMessageDecoder<EventTwo> DECODER =
+  private static final BinaryMessageDecoder<LogicalTwo> DECODER =
       new BinaryMessageDecoder<>(MODEL$, SCHEMA$);
 
   /**
    * Return the BinaryMessageEncoder instance used by this class.
    * @return the message encoder used by this class
    */
-  public static BinaryMessageEncoder<EventTwo> getEncoder() {
+  public static BinaryMessageEncoder<LogicalTwo> getEncoder() {
     return ENCODER;
   }
 
@@ -44,7 +44,7 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
    * Return the BinaryMessageDecoder instance used by this class.
    * @return the message decoder used by this class
    */
-  public static BinaryMessageDecoder<EventTwo> getDecoder() {
+  public static BinaryMessageDecoder<LogicalTwo> getDecoder() {
     return DECODER;
   }
 
@@ -53,12 +53,12 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
    * @param resolver a {@link SchemaStore} used to find schemas by fingerprint
    * @return a BinaryMessageDecoder instance for this class backed by the given SchemaStore
    */
-  public static BinaryMessageDecoder<EventTwo> createDecoder(SchemaStore resolver) {
+  public static BinaryMessageDecoder<LogicalTwo> createDecoder(SchemaStore resolver) {
     return new BinaryMessageDecoder<>(MODEL$, SCHEMA$, resolver);
   }
 
   /**
-   * Serializes this EventTwo to a ByteBuffer.
+   * Serializes this LogicalTwo to a ByteBuffer.
    * @return a buffer holding the serialized data for this instance
    * @throws java.io.IOException if this instance could not be serialized
    */
@@ -67,12 +67,12 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
   }
 
   /**
-   * Deserializes a EventTwo from a ByteBuffer.
+   * Deserializes a LogicalTwo from a ByteBuffer.
    * @param b a byte buffer holding serialized data for an instance of this class
-   * @return a EventTwo instance decoded from the given buffer
+   * @return a LogicalTwo instance decoded from the given buffer
    * @throws java.io.IOException if the given bytes could not be deserialized into an instance of this class
    */
-  public static EventTwo fromByteBuffer(
+  public static LogicalTwo fromByteBuffer(
       java.nio.ByteBuffer b) throws java.io.IOException {
     return DECODER.decode(b);
   }
@@ -86,7 +86,7 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
    * to their default values from the schema.  If that is desired then
    * one should use <code>newBuilder()</code>.
    */
-  public EventTwo() {}
+  public LogicalTwo() {}
 
   /**
    * All-args constructor.
@@ -94,7 +94,7 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
    * @param sent The new value for sent
    * @param amount The new value for amount
    */
-  public EventTwo(java.lang.String id, java.time.LocalDateTime sent, java.math.BigDecimal amount) {
+  public LogicalTwo(java.lang.String id, java.time.LocalDateTime sent, java.math.BigDecimal amount) {
     this.id = id;
     this.sent = sent;
     this.amount = amount;
@@ -181,45 +181,45 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
   }
 
   /**
-   * Creates a new EventTwo RecordBuilder.
-   * @return A new EventTwo RecordBuilder
+   * Creates a new LogicalTwo RecordBuilder.
+   * @return A new LogicalTwo RecordBuilder
    */
-  public static com.example.event.EventTwo.Builder newBuilder() {
-    return new com.example.event.EventTwo.Builder();
+  public static com.example.event.LogicalTwo.Builder newBuilder() {
+    return new com.example.event.LogicalTwo.Builder();
   }
 
   /**
-   * Creates a new EventTwo RecordBuilder by copying an existing Builder.
+   * Creates a new LogicalTwo RecordBuilder by copying an existing Builder.
    * @param other The existing builder to copy.
-   * @return A new EventTwo RecordBuilder
+   * @return A new LogicalTwo RecordBuilder
    */
-  public static com.example.event.EventTwo.Builder newBuilder(com.example.event.EventTwo.Builder other) {
+  public static com.example.event.LogicalTwo.Builder newBuilder(com.example.event.LogicalTwo.Builder other) {
     if (other == null) {
-      return new com.example.event.EventTwo.Builder();
+      return new com.example.event.LogicalTwo.Builder();
     } else {
-      return new com.example.event.EventTwo.Builder(other);
+      return new com.example.event.LogicalTwo.Builder(other);
     }
   }
 
   /**
-   * Creates a new EventTwo RecordBuilder by copying an existing EventTwo instance.
+   * Creates a new LogicalTwo RecordBuilder by copying an existing LogicalTwo instance.
    * @param other The existing instance to copy.
-   * @return A new EventTwo RecordBuilder
+   * @return A new LogicalTwo RecordBuilder
    */
-  public static com.example.event.EventTwo.Builder newBuilder(com.example.event.EventTwo other) {
+  public static com.example.event.LogicalTwo.Builder newBuilder(com.example.event.LogicalTwo other) {
     if (other == null) {
-      return new com.example.event.EventTwo.Builder();
+      return new com.example.event.LogicalTwo.Builder();
     } else {
-      return new com.example.event.EventTwo.Builder(other);
+      return new com.example.event.LogicalTwo.Builder(other);
     }
   }
 
   /**
-   * RecordBuilder for EventTwo instances.
+   * RecordBuilder for LogicalTwo instances.
    */
   @org.apache.avro.specific.AvroGenerated
-  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<EventTwo>
-    implements org.apache.avro.data.RecordBuilder<EventTwo> {
+  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<LogicalTwo>
+    implements org.apache.avro.data.RecordBuilder<LogicalTwo> {
 
     private java.lang.String id;
     private java.time.LocalDateTime sent;
@@ -234,7 +234,7 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(com.example.event.EventTwo.Builder other) {
+    private Builder(com.example.event.LogicalTwo.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -251,10 +251,10 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
     }
 
     /**
-     * Creates a Builder by copying an existing EventTwo instance
+     * Creates a Builder by copying an existing LogicalTwo instance
      * @param other The existing instance to copy.
      */
-    private Builder(com.example.event.EventTwo other) {
+    private Builder(com.example.event.LogicalTwo other) {
       super(SCHEMA$, MODEL$);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -284,7 +284,7 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
       * @param value The value of 'id'.
       * @return This builder.
       */
-    public com.example.event.EventTwo.Builder setId(java.lang.String value) {
+    public com.example.event.LogicalTwo.Builder setId(java.lang.String value) {
       validate(fields()[0], value);
       this.id = value;
       fieldSetFlags()[0] = true;
@@ -304,7 +304,7 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
       * Clears the value of the 'id' field.
       * @return This builder.
       */
-    public com.example.event.EventTwo.Builder clearId() {
+    public com.example.event.LogicalTwo.Builder clearId() {
       id = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -324,7 +324,7 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
       * @param value The value of 'sent'.
       * @return This builder.
       */
-    public com.example.event.EventTwo.Builder setSent(java.time.LocalDateTime value) {
+    public com.example.event.LogicalTwo.Builder setSent(java.time.LocalDateTime value) {
       validate(fields()[1], value);
       this.sent = value;
       fieldSetFlags()[1] = true;
@@ -344,7 +344,7 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
       * Clears the value of the 'sent' field.
       * @return This builder.
       */
-    public com.example.event.EventTwo.Builder clearSent() {
+    public com.example.event.LogicalTwo.Builder clearSent() {
       sent = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -364,7 +364,7 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
       * @param value The value of 'amount'.
       * @return This builder.
       */
-    public com.example.event.EventTwo.Builder setAmount(java.math.BigDecimal value) {
+    public com.example.event.LogicalTwo.Builder setAmount(java.math.BigDecimal value) {
       validate(fields()[2], value);
       this.amount = value;
       fieldSetFlags()[2] = true;
@@ -384,7 +384,7 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
       * Clears the value of the 'amount' field.
       * @return This builder.
       */
-    public com.example.event.EventTwo.Builder clearAmount() {
+    public com.example.event.LogicalTwo.Builder clearAmount() {
       amount = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -392,9 +392,9 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
 
     @Override
     @SuppressWarnings("unchecked")
-    public EventTwo build() {
+    public LogicalTwo build() {
       try {
-        EventTwo record = new EventTwo();
+        LogicalTwo record = new LogicalTwo();
         record.id = fieldSetFlags()[0] ? this.id : (java.lang.String) defaultValue(fields()[0]);
         record.sent = fieldSetFlags()[1] ? this.sent : (java.time.LocalDateTime) defaultValue(fields()[1]);
         record.amount = fieldSetFlags()[2] ? this.amount : (java.math.BigDecimal) defaultValue(fields()[2]);
@@ -408,8 +408,8 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
   }
 
   @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumWriter<EventTwo>
-    WRITER$ = (org.apache.avro.io.DatumWriter<EventTwo>)MODEL$.createDatumWriter(SCHEMA$);
+  private static final org.apache.avro.io.DatumWriter<LogicalTwo>
+    WRITER$ = (org.apache.avro.io.DatumWriter<LogicalTwo>)MODEL$.createDatumWriter(SCHEMA$);
 
   @Override public void writeExternal(java.io.ObjectOutput out)
     throws java.io.IOException {
@@ -417,8 +417,8 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
   }
 
   @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumReader<EventTwo>
-    READER$ = (org.apache.avro.io.DatumReader<EventTwo>)MODEL$.createDatumReader(SCHEMA$);
+  private static final org.apache.avro.io.DatumReader<LogicalTwo>
+    READER$ = (org.apache.avro.io.DatumReader<LogicalTwo>)MODEL$.createDatumReader(SCHEMA$);
 
   @Override public void readExternal(java.io.ObjectInput in)
     throws java.io.IOException {

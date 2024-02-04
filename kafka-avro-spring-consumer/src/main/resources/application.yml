@@ -11,9 +11,11 @@ logging:
     com.example: debug
 
 event-consumer:
-  #  event-topic: multi-event
-  event-one-topic: event-one
-  event-two-topic: event-two
+  topics:
+    simple-one: simple-one
+    simple-two: simple-two
+    logical-one: logical-one
+    logical-two: logical-two
   properties:
     group.id: spring-group-1
     bootstrap.servers: kafka.local:9092
@@ -22,10 +24,7 @@ event-consumer:
     value.deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
     spring.deserializer.key.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
     spring.deserializer.value.delegate.class: io.confluent.kafka.serializers.KafkaAvroDeserializer
-    avro.reflection.allow.null: true
     avro.use.logical.type.converters: true
-  #    auto.register.schemas: false
-  #    use.latest.version: true
 
 dlt-producer:
   properties:
