@@ -13,14 +13,28 @@ import org.springframework.stereotype.Service;
 class EventConsumer {
 
     @KafkaListener(topics = "${event-consumer.topics.simple-one}", containerFactory = "eventListenerContainerFactory")
-    void receiveEventOne(ConsumerRecord<String, SimpleOne> consumerRecord, Acknowledgment acknowledgment) {
+    void receiveSimpleOne(ConsumerRecord<String, SimpleOne> consumerRecord, Acknowledgment acknowledgment) {
         log.debug("receive record={}", consumerRecord);
         // do something with the record
         acknowledgment.acknowledge();
     }
 
     @KafkaListener(topics = "${event-consumer.topics.simple-two}", containerFactory = "eventListenerContainerFactory")
-    void receiveEventTwo(ConsumerRecord<String, SimpleTwo> consumerRecord, Acknowledgment acknowledgment) {
+    void receiveSimpleTwo(ConsumerRecord<String, SimpleTwo> consumerRecord, Acknowledgment acknowledgment) {
+        log.debug("receive record={}", consumerRecord);
+        // do something with the record
+        acknowledgment.acknowledge();
+    }
+
+    @KafkaListener(topics = "${event-consumer.topics.logical-one}", containerFactory = "eventListenerContainerFactory")
+    void receiveLogicalOne(ConsumerRecord<String, LogicalOne> consumerRecord, Acknowledgment acknowledgment) {
+        log.debug("receive record={}", consumerRecord);
+        // do something with the record
+        acknowledgment.acknowledge();
+    }
+
+    @KafkaListener(topics = "${event-consumer.topics.logical-two}", containerFactory = "eventListenerContainerFactory")
+    void receiveLogicalTwo(ConsumerRecord<String, LogicalTwo> consumerRecord, Acknowledgment acknowledgment) {
         log.debug("receive record={}", consumerRecord);
         // do something with the record
         acknowledgment.acknowledge();
