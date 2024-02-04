@@ -25,6 +25,8 @@ event-consumer:
     spring.deserializer.key.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
     spring.deserializer.value.delegate.class: io.confluent.kafka.serializers.KafkaAvroDeserializer
     avro.use.logical.type.converters: true
+    auto.register.schemas: false
+    use.latest.version: true
 
 dlt-producer:
   properties:

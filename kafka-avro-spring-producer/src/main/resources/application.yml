@@ -22,4 +22,5 @@ event-producer:
     key.serializer: org.apache.kafka.common.serialization.StringSerializer
     value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
     avro.use.logical.type.converters: true
-    auto.register.schemas: true
+    auto.register.schemas: false
+    use.latest.version: true
