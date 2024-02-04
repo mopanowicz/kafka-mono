@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Data
 @Builder
-public class Event {
+public class EventX {
     String text;
     BigDecimal amount;
     Date date;

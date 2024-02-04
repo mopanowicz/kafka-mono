@@ -3,19 +3,21 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package com.example;
+package com.example.event;
 
-import org.apache.avro.message.BinaryMessageDecoder;
-import org.apache.avro.message.BinaryMessageEncoder;
-import org.apache.avro.message.SchemaStore;
+import org.apache.avro.generic.GenericArray;
 import org.apache.avro.specific.SpecificData;
+import org.apache.avro.util.Utf8;
+import org.apache.avro.message.BinaryMessageEncoder;
+import org.apache.avro.message.BinaryMessageDecoder;
+import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class EventOne extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 2955100295143754995L;
+  private static final long serialVersionUID = 5095794585555059949L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"EventOne\",\"namespace\":\"com.example\",\"fields\":[{\"name\":\"id\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"sent\",\"type\":[\"null\",{\"type\":\"long\",\"logicalType\":\"local-timestamp-millis\"}],\"default\":null},{\"name\":\"text\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"EventOne\",\"namespace\":\"com.example.event\",\"fields\":[{\"name\":\"id\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"sent\",\"type\":[\"null\",{\"type\":\"long\",\"logicalType\":\"local-timestamp-millis\"}],\"default\":null},{\"name\":\"text\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -181,8 +183,8 @@ public class EventOne extends org.apache.avro.specific.SpecificRecordBase implem
    * Creates a new EventOne RecordBuilder.
    * @return A new EventOne RecordBuilder
    */
-  public static com.example.EventOne.Builder newBuilder() {
-    return new com.example.EventOne.Builder();
+  public static com.example.event.EventOne.Builder newBuilder() {
+    return new com.example.event.EventOne.Builder();
   }
 
   /**
@@ -190,11 +192,11 @@ public class EventOne extends org.apache.avro.specific.SpecificRecordBase implem
    * @param other The existing builder to copy.
    * @return A new EventOne RecordBuilder
    */
-  public static com.example.EventOne.Builder newBuilder(com.example.EventOne.Builder other) {
+  public static com.example.event.EventOne.Builder newBuilder(com.example.event.EventOne.Builder other) {
     if (other == null) {
-      return new com.example.EventOne.Builder();
+      return new com.example.event.EventOne.Builder();
     } else {
-      return new com.example.EventOne.Builder(other);
+      return new com.example.event.EventOne.Builder(other);
     }
   }
 
@@ -203,11 +205,11 @@ public class EventOne extends org.apache.avro.specific.SpecificRecordBase implem
    * @param other The existing instance to copy.
    * @return A new EventOne RecordBuilder
    */
-  public static com.example.EventOne.Builder newBuilder(com.example.EventOne other) {
+  public static com.example.event.EventOne.Builder newBuilder(com.example.event.EventOne other) {
     if (other == null) {
-      return new com.example.EventOne.Builder();
+      return new com.example.event.EventOne.Builder();
     } else {
-      return new com.example.EventOne.Builder(other);
+      return new com.example.event.EventOne.Builder(other);
     }
   }
 
@@ -231,7 +233,7 @@ public class EventOne extends org.apache.avro.specific.SpecificRecordBase implem
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(com.example.EventOne.Builder other) {
+    private Builder(com.example.event.EventOne.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -251,7 +253,7 @@ public class EventOne extends org.apache.avro.specific.SpecificRecordBase implem
      * Creates a Builder by copying an existing EventOne instance
      * @param other The existing instance to copy.
      */
-    private Builder(com.example.EventOne other) {
+    private Builder(com.example.event.EventOne other) {
       super(SCHEMA$, MODEL$);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -281,7 +283,7 @@ public class EventOne extends org.apache.avro.specific.SpecificRecordBase implem
       * @param value The value of 'id'.
       * @return This builder.
       */
-    public com.example.EventOne.Builder setId(java.lang.String value) {
+    public com.example.event.EventOne.Builder setId(java.lang.String value) {
       validate(fields()[0], value);
       this.id = value;
       fieldSetFlags()[0] = true;
@@ -301,7 +303,7 @@ public class EventOne extends org.apache.avro.specific.SpecificRecordBase implem
       * Clears the value of the 'id' field.
       * @return This builder.
       */
-    public com.example.EventOne.Builder clearId() {
+    public com.example.event.EventOne.Builder clearId() {
       id = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -321,7 +323,7 @@ public class EventOne extends org.apache.avro.specific.SpecificRecordBase implem
       * @param value The value of 'sent'.
       * @return This builder.
       */
-    public com.example.EventOne.Builder setSent(java.time.LocalDateTime value) {
+    public com.example.event.EventOne.Builder setSent(java.time.LocalDateTime value) {
       validate(fields()[1], value);
       this.sent = value;
       fieldSetFlags()[1] = true;
@@ -341,7 +343,7 @@ public class EventOne extends org.apache.avro.specific.SpecificRecordBase implem
       * Clears the value of the 'sent' field.
       * @return This builder.
       */
-    public com.example.EventOne.Builder clearSent() {
+    public com.example.event.EventOne.Builder clearSent() {
       sent = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -361,7 +363,7 @@ public class EventOne extends org.apache.avro.specific.SpecificRecordBase implem
       * @param value The value of 'text'.
       * @return This builder.
       */
-    public com.example.EventOne.Builder setText(java.lang.String value) {
+    public com.example.event.EventOne.Builder setText(java.lang.String value) {
       validate(fields()[2], value);
       this.text = value;
       fieldSetFlags()[2] = true;
@@ -381,7 +383,7 @@ public class EventOne extends org.apache.avro.specific.SpecificRecordBase implem
       * Clears the value of the 'text' field.
       * @return This builder.
       */
-    public com.example.EventOne.Builder clearText() {
+    public com.example.event.EventOne.Builder clearText() {
       text = null;
       fieldSetFlags()[2] = false;
       return this;

@@ -15,6 +15,7 @@
 
         <avro.version>1.11.3</avro.version>
         <confluent.version>7.5.3</confluent.version>
+        <lombok.version>1.18.30</lombok.version>
 
         <schema.registry.url>http://kafka-tools.local:8081</schema.registry.url>
     </properties>
@@ -38,6 +39,13 @@
             <groupId>io.confluent</groupId>
             <artifactId>kafka-avro-serializer</artifactId>
             <version>${confluent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 

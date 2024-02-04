@@ -1,6 +1,6 @@
 package com.example;
 
-import com.example.event.Event;
+import com.example.event.EventX;
 import io.confluent.kafka.serializers.AbstractKafkaSchemaSerDeConfig;
 import io.confluent.kafka.serializers.KafkaAvroSerializerConfig;
 import org.apache.kafka.clients.producer.KafkaProducer;
@@ -49,7 +49,7 @@ public class KafkaAvroReflectionProducerApplication implements CommandLineRunner
 		KafkaProducer<String, Object> producer = new KafkaProducer<>(props);
 
 		String key = "reflection-key-1";
-		Event event = Event.builder()
+		EventX event = EventX.builder()
 				.text("reflection-value-" + random.nextInt())
 				.amount(BigDecimal.valueOf(random.nextDouble()).setScale(4, RoundingMode.HALF_EVEN))
 				.date(Date.from(Instant.now()))

@@ -3,19 +3,21 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package com.example;
+package com.example.event;
 
-import org.apache.avro.message.BinaryMessageDecoder;
-import org.apache.avro.message.BinaryMessageEncoder;
-import org.apache.avro.message.SchemaStore;
+import org.apache.avro.generic.GenericArray;
 import org.apache.avro.specific.SpecificData;
+import org.apache.avro.util.Utf8;
+import org.apache.avro.message.BinaryMessageEncoder;
+import org.apache.avro.message.BinaryMessageDecoder;
+import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 1151070356526880899L;
+  private static final long serialVersionUID = 5211794249935314673L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"EventTwo\",\"namespace\":\"com.example\",\"fields\":[{\"name\":\"id\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"sent\",\"type\":[\"null\",{\"type\":\"long\",\"logicalType\":\"local-timestamp-millis\"}],\"default\":null},{\"name\":\"amount\",\"type\":[\"null\",{\"type\":\"bytes\",\"logicalType\":\"decimal\",\"precision\":10,\"scale\":4}],\"default\":null}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"EventTwo\",\"namespace\":\"com.example.event\",\"fields\":[{\"name\":\"id\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"sent\",\"type\":[\"null\",{\"type\":\"long\",\"logicalType\":\"local-timestamp-millis\"}],\"default\":null},{\"name\":\"amount\",\"type\":[\"null\",{\"type\":\"bytes\",\"logicalType\":\"decimal\",\"precision\":10,\"scale\":4}],\"default\":null}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -182,8 +184,8 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
    * Creates a new EventTwo RecordBuilder.
    * @return A new EventTwo RecordBuilder
    */
-  public static com.example.EventTwo.Builder newBuilder() {
-    return new com.example.EventTwo.Builder();
+  public static com.example.event.EventTwo.Builder newBuilder() {
+    return new com.example.event.EventTwo.Builder();
   }
 
   /**
@@ -191,11 +193,11 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
    * @param other The existing builder to copy.
    * @return A new EventTwo RecordBuilder
    */
-  public static com.example.EventTwo.Builder newBuilder(com.example.EventTwo.Builder other) {
+  public static com.example.event.EventTwo.Builder newBuilder(com.example.event.EventTwo.Builder other) {
     if (other == null) {
-      return new com.example.EventTwo.Builder();
+      return new com.example.event.EventTwo.Builder();
     } else {
-      return new com.example.EventTwo.Builder(other);
+      return new com.example.event.EventTwo.Builder(other);
     }
   }
 
@@ -204,11 +206,11 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
    * @param other The existing instance to copy.
    * @return A new EventTwo RecordBuilder
    */
-  public static com.example.EventTwo.Builder newBuilder(com.example.EventTwo other) {
+  public static com.example.event.EventTwo.Builder newBuilder(com.example.event.EventTwo other) {
     if (other == null) {
-      return new com.example.EventTwo.Builder();
+      return new com.example.event.EventTwo.Builder();
     } else {
-      return new com.example.EventTwo.Builder(other);
+      return new com.example.event.EventTwo.Builder(other);
     }
   }
 
@@ -232,7 +234,7 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(com.example.EventTwo.Builder other) {
+    private Builder(com.example.event.EventTwo.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -252,7 +254,7 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
      * Creates a Builder by copying an existing EventTwo instance
      * @param other The existing instance to copy.
      */
-    private Builder(com.example.EventTwo other) {
+    private Builder(com.example.event.EventTwo other) {
       super(SCHEMA$, MODEL$);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -282,7 +284,7 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
       * @param value The value of 'id'.
       * @return This builder.
       */
-    public com.example.EventTwo.Builder setId(java.lang.String value) {
+    public com.example.event.EventTwo.Builder setId(java.lang.String value) {
       validate(fields()[0], value);
       this.id = value;
       fieldSetFlags()[0] = true;
@@ -302,7 +304,7 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
       * Clears the value of the 'id' field.
       * @return This builder.
       */
-    public com.example.EventTwo.Builder clearId() {
+    public com.example.event.EventTwo.Builder clearId() {
       id = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -322,7 +324,7 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
       * @param value The value of 'sent'.
       * @return This builder.
       */
-    public com.example.EventTwo.Builder setSent(java.time.LocalDateTime value) {
+    public com.example.event.EventTwo.Builder setSent(java.time.LocalDateTime value) {
       validate(fields()[1], value);
       this.sent = value;
       fieldSetFlags()[1] = true;
@@ -342,7 +344,7 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
       * Clears the value of the 'sent' field.
       * @return This builder.
       */
-    public com.example.EventTwo.Builder clearSent() {
+    public com.example.event.EventTwo.Builder clearSent() {
       sent = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -362,7 +364,7 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
       * @param value The value of 'amount'.
       * @return This builder.
       */
-    public com.example.EventTwo.Builder setAmount(java.math.BigDecimal value) {
+    public com.example.event.EventTwo.Builder setAmount(java.math.BigDecimal value) {
       validate(fields()[2], value);
       this.amount = value;
       fieldSetFlags()[2] = true;
@@ -382,7 +384,7 @@ public class EventTwo extends org.apache.avro.specific.SpecificRecordBase implem
       * Clears the value of the 'amount' field.
       * @return This builder.
       */
-    public com.example.EventTwo.Builder clearAmount() {
+    public com.example.event.EventTwo.Builder clearAmount() {
       amount = null;
       fieldSetFlags()[2] = false;
       return this;

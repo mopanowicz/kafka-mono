@@ -16,6 +16,7 @@
 	<properties>
 		<java.version>17</java.version>
 		<confluent.version>7.5.3</confluent.version>
+		<kafka-avro-model.version>0.0.1</kafka-avro-model.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -27,6 +28,12 @@
 			<groupId>io.confluent</groupId>
 			<artifactId>kafka-streams-avro-serde</artifactId>
 			<version>${confluent.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.example</groupId>
+			<artifactId>kafka-avro-model</artifactId>
+			<version>${kafka-avro-model.version}</version>
 		</dependency>
 
 		<dependency>

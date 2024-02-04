@@ -1,4 +1,4 @@
 [
-  "com.example.EventOne",
-  "com.example.EventTwo"
+  "com.example.event.EventOne",
+  "com.example.event.EventTwo"
 ]
