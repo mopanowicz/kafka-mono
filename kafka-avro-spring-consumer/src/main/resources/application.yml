@@ -10,6 +10,13 @@ logging:
     root: info
     com.example: debug
 
+dlt-producer:
+  properties:
+    bootstrap.servers: kafka.local:9092
+    schema.registry.url: http://kafka-tools.local:8081
+    key.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+    value.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+
 event-consumer:
   topics:
     simple-one: simple-one
@@ -17,7 +24,7 @@ event-consumer:
     logical-one: logical-one
     logical-two: logical-two
   properties:
-    group.id: spring-group-1
+    group.id: event-group-1
     bootstrap.servers: kafka.local:9092
     schema.registry.url: http://kafka-tools.local:8081
     key.deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
@@ -28,9 +35,17 @@ event-consumer:
     auto.register.schemas: false
     use.latest.version: true
 
-dlt-producer:
+reflected-event-consumer:
+  topics:
+    reflected-one: reflected-one
+    reflected-two: reflected-two
   properties:
+    group.id: reflected-group-1
     bootstrap.servers: kafka.local:9092
     schema.registry.url: http://kafka-tools.local:8081
-    key.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
-    value.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+    key.deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+    value.deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+    spring.deserializer.key.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
+    spring.deserializer.value.delegate.class: io.confluent.kafka.streams.serdes.avro.ReflectionAvroDeserializer
+    avro.reflection.allow.null: true
+    auto.offset.reset: latest
