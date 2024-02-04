@@ -1,7 +1,6 @@
 package com.example.event;
 
 import lombok.Setter;
-import org.apache.avro.specific.SpecificRecord;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -18,13 +17,13 @@ import java.util.stream.Collectors;
 @Setter
 @Configuration
 @EnableTransactionManagement
-@ConfigurationProperties(prefix = "event-producer")
-class EventProducerConfig {
+@ConfigurationProperties(prefix = "reflected-event-producer")
+class ReflectedEventProducerConfig {
 
     Map<String, String> properties;
 
-    @Bean("eventProducerFactory")
-    ProducerFactory<String, SpecificRecord> eventProducerFactory() {
+    @Bean("reflectedEventProducerFactory")
+    ProducerFactory<Object, Object> reflectedEventProducerFactory() {
         Map<String, Object> configs = properties.entrySet()
                 .stream()
                 .filter(e -> StringUtils.hasText(e.getValue()))
@@ -32,8 +31,8 @@ class EventProducerConfig {
         return new DefaultKafkaProducerFactory<>(configs);
     }
 
-    @Bean("eventKafkaTemplate")
-    public KafkaTemplate<String, SpecificRecord> eventKafkaTemplate(@Qualifier("eventProducerFactory") ProducerFactory<String, SpecificRecord> producerFactory) {
+    @Bean("reflectedKafkaTemplate")
+    public KafkaTemplate<Object, Object> reflectedKafkaTemplate(@Qualifier("reflectedEventProducerFactory") ProducerFactory<Object, Object> producerFactory) {
         return new KafkaTemplate<>(producerFactory);
     }
 }

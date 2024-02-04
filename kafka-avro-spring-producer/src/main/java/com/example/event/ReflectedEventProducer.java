@@ -2,7 +2,6 @@ package com.example.event;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.avro.specific.SpecificRecord;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,24 +12,24 @@ import org.springframework.stereotype.Service;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-@Service("eventProducer")
+@Service("reflectedEventProducer")
 @Setter
 @Slf4j
-class EventProducer {
+public class ReflectedEventProducer {
 
-    private final KafkaTemplate<String, SpecificRecord> kafkaTemplate;
+    private final KafkaTemplate<Object, Object> kafkaTemplate;
 
-    @Value("${event-producer.blocking:false}")
+    @Value("${reflected-event-producer.blocking:false}")
     boolean blocking;
 
-    public EventProducer(@Qualifier("eventKafkaTemplate") KafkaTemplate<String, SpecificRecord> kafkaTemplate) {
+    public ReflectedEventProducer(@Qualifier("reflectedKafkaTemplate") KafkaTemplate<Object, Object> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    public void send(String topic, String key, SpecificRecord event) throws InterruptedException, ExecutionException {
+    public void send(String topic, Object key, Object event) throws InterruptedException, ExecutionException {
         log.debug("send topic={} key={} event={}", topic, key, event);
-        ProducerRecord<String, SpecificRecord> producerRecord = new ProducerRecord<>(topic, key, event);
-        CompletableFuture<SendResult<String, SpecificRecord>> future = kafkaTemplate.send(producerRecord);
+        ProducerRecord<Object, Object> producerRecord = new ProducerRecord<>(topic, key, event);
+        CompletableFuture<SendResult<Object, Object>> future = kafkaTemplate.send(producerRecord);
         if (blocking) {
             future.get();
         }

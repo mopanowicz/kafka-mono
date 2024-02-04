@@ -1,9 +1,8 @@
 package com.example.event;
 
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,16 +16,20 @@ import java.util.concurrent.ExecutionException;
 
 @RestController
 @Setter
-@Slf4j
-@RequiredArgsConstructor
-class EventProducerController {
+class ProducerController {
 
     private final EventProducer eventProducer;
+    private final ReflectedEventProducer reflectedEventProducer;
 
     Random random = new Random();
 
+    public ProducerController(@Qualifier("eventProducer") EventProducer eventProducer, @Qualifier("reflectedEventProducer") ReflectedEventProducer reflectedEventProducer) {
+        this.eventProducer = eventProducer;
+        this.reflectedEventProducer = reflectedEventProducer;
+    }
+
     @GetMapping("/produce-simple-one")
-    EventProducerResult produceSimpleOne(
+    ProducerResult produceSimpleOne(
             @RequestParam(name = "topic", defaultValue = "${event-producer.topics.simple-one}", required = false) String topic,
             @RequestParam(name = "numberOfEvents", defaultValue = "1", required = false) int numberOfEvents
     ) throws InterruptedException, ExecutionException {
@@ -38,11 +41,11 @@ class EventProducerController {
                     .build();
             eventProducer.send(topic, event.getId(), event);
         }
-        return new EventProducerResult(topic, SimpleOne.class.getName(), numberOfEvents);
+        return new ProducerResult(topic, SimpleOne.class.getName(), numberOfEvents);
     }
 
     @GetMapping("/produce-simple-two")
-    EventProducerResult produceSimpleTwo(
+    ProducerResult produceSimpleTwo(
             @RequestParam(name = "topic", defaultValue = "${event-producer.topics.simple-two}", required = false) String topic,
             @RequestParam(name = "numberOfEvents", defaultValue = "1", required = false) int numberOfEvents
     ) throws InterruptedException, ExecutionException {
@@ -54,11 +57,11 @@ class EventProducerController {
                     .build();
             eventProducer.send(topic, event.getId(), event);
         }
-        return new EventProducerResult(topic, SimpleTwo.class.getName(), numberOfEvents);
+        return new ProducerResult(topic, SimpleTwo.class.getName(), numberOfEvents);
     }
 
     @GetMapping("/produce-logical-one")
-    EventProducerResult produceLogicalOne(
+    ProducerResult produceLogicalOne(
             @RequestParam(name = "topic", defaultValue = "${event-producer.topics.logical-one}", required = false) String topic,
             @RequestParam(name = "numberOfEvents", defaultValue = "1", required = false) int numberOfEvents
     ) throws InterruptedException, ExecutionException {
@@ -70,11 +73,11 @@ class EventProducerController {
                     .build();
             eventProducer.send(topic, event.getId(), event);
         }
-        return new EventProducerResult(topic, LogicalOne.class.getName(), numberOfEvents);
+        return new ProducerResult(topic, LogicalOne.class.getName(), numberOfEvents);
     }
 
     @GetMapping("/produce-logical-two")
-    EventProducerResult produceLogicalTwo(
+    ProducerResult produceLogicalTwo(
             @RequestParam(name = "topic", defaultValue = "${event-producer.topics.logical-two}", required = false) String topic,
             @RequestParam(name = "numberOfEvents", defaultValue = "1", required = false) int numberOfEvents
     ) throws InterruptedException, ExecutionException {
@@ -86,6 +89,36 @@ class EventProducerController {
                     .build();
             eventProducer.send(topic, event.getId(), event);
         }
-        return new EventProducerResult(topic, LogicalTwo.class.getName(), numberOfEvents);
+        return new ProducerResult(topic, LogicalTwo.class.getName(), numberOfEvents);
+    }
+
+    @GetMapping("/produce-reflected-one")
+    ProducerResult produceReflectedOne(
+            @RequestParam(name = "topic", defaultValue = "${reflected-event-producer.topics.reflected-one}", required = false) String topic,
+            @RequestParam(name = "numberOfEvents", defaultValue = "1", required = false) int numberOfEvents
+    ) throws InterruptedException, ExecutionException {
+        for (int i = 0; i < numberOfEvents; i++) {
+            ReflectedOne event = new ReflectedOne();
+            event.setId(UUID.randomUUID().toString());
+            event.setSent(System.currentTimeMillis());
+            event.setText(RandomStringUtils.randomAlphanumeric(32));
+            reflectedEventProducer.send(topic, event.getId(), event);
+        }
+        return new ProducerResult(topic, ReflectedOne.class.getName(), numberOfEvents);
+    }
+
+    @GetMapping("/produce-reflected-two")
+    ProducerResult produceReflectedTwo(
+            @RequestParam(name = "topic", defaultValue = "${reflected-event-producer.topics.reflected-two}", required = false) String topic,
+            @RequestParam(name = "numberOfEvents", defaultValue = "1", required = false) int numberOfEvents
+    ) throws InterruptedException, ExecutionException {
+        for (int i = 0; i < numberOfEvents; i++) {
+            ReflectedTwo event = new ReflectedTwo();
+            event.setId(UUID.randomUUID().toString());
+            event.setSent(System.currentTimeMillis());
+            event.setAmount(random.nextDouble());
+            reflectedEventProducer.send(topic, event.getId(), event);
+        }
+        return new ProducerResult(topic, ReflectedTwo.class.getName(), numberOfEvents);
     }
 }
