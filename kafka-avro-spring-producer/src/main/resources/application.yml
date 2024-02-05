@@ -10,6 +10,10 @@ logging:
     root: info
     com.example: debug
 
+kafka:
+  bootstrap.servers: localhost:9092
+  schema.registry.url: http://localhost:8081
+
 event-producer:
   topics:
     simple-one: simple-one
@@ -17,8 +21,8 @@ event-producer:
     logical-one: logical-one
     logical-two: logical-two
   properties:
-    bootstrap.servers: kafka.local:9092
-    schema.registry.url: http://kafka-tools.local:8081
+    bootstrap.servers: ${kafka.bootstrap.servers}
+    schema.registry.url: ${kafka.schema.registry.url}
     key.serializer: org.apache.kafka.common.serialization.StringSerializer
     value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
     avro.use.logical.type.converters: true
@@ -30,10 +34,10 @@ reflected-event-producer:
     reflected-one: reflected-one
     reflected-two: reflected-two
   properties:
-    bootstrap.servers: kafka.local:9092
-    schema.registry.url: http://kafka-tools.local:8081
+    bootstrap.servers: ${kafka.bootstrap.servers}
+    schema.registry.url: ${kafka.schema.registry.url}
     key.serializer: org.apache.kafka.common.serialization.StringSerializer
     value.serializer: io.confluent.kafka.streams.serdes.avro.ReflectionAvroSerializer
     avro.reflection.allow.null: true
     auto.register.schemas: true
-#    use.latest.version: true
+    use.latest.version: true

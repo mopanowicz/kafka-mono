@@ -10,10 +10,14 @@ logging:
     root: info
     com.example: debug
 
+kafka:
+  bootstrap.servers: localhost:9092
+  schema.registry.url: http://localhost:8081
+
 dlt-producer:
   properties:
-    bootstrap.servers: kafka.local:9092
-    schema.registry.url: http://kafka-tools.local:8081
+    bootstrap.servers: ${kafka.bootstrap.servers}
+    schema.registry.url: ${kafka.schema.registry.url}
     key.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
     value.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
 
@@ -23,10 +27,12 @@ event-consumer:
     simple-two: simple-two
     logical-one: logical-one
     logical-two: logical-two
+    multi-simple: multi-simple
+    multi-logical: multi-logical
   properties:
     group.id: event-group-1
-    bootstrap.servers: kafka.local:9092
-    schema.registry.url: http://kafka-tools.local:8081
+    bootstrap.servers: ${kafka.bootstrap.servers}
+    schema.registry.url: ${kafka.schema.registry.url}
     key.deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
     value.deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
     spring.deserializer.key.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
@@ -41,8 +47,8 @@ reflected-event-consumer:
     reflected-two: reflected-two
   properties:
     group.id: reflected-group-1
-    bootstrap.servers: kafka.local:9092
-    schema.registry.url: http://kafka-tools.local:8081
+    bootstrap.servers: ${kafka.bootstrap.servers}
+    schema.registry.url: ${kafka.schema.registry.url}
     key.deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
     value.deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
     spring.deserializer.key.delegate.class: org.apache.kafka.common.serialization.StringDeserializer

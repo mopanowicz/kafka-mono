@@ -17,7 +17,7 @@
         <confluent.version>7.5.3</confluent.version>
         <lombok.version>1.18.30</lombok.version>
 
-        <schema.registry.url>http://kafka-tools.local:8081</schema.registry.url>
+        <schema.registry.url>http://localhost:8081</schema.registry.url>
     </properties>
 
     <repositories>
