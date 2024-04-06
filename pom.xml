@@ -12,6 +12,8 @@
 
     <modules>
         <module>kafka-avro-model</module>
+        <module>kafka-avro-simple-producer</module>
+        <module>kafka-avro-simple-consumer</module>
         <module>kafka-avro-spring-producer</module>
         <module>kafka-avro-spring-consumer</module>
     </modules>
