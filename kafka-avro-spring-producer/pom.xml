@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.2</version>
+        <version>3.2.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
@@ -15,7 +15,7 @@
     <description>Kafka avro producer demo project for Spring Boot</description>
     <properties>
         <java.version>17</java.version>
-        <springdoc.version>2.3.0</springdoc.version>
+        <springdoc.version>2.5.0</springdoc.version>
         <confluent.version>7.5.3</confluent.version>
         <kafka-avro-model.version>0.0.1</kafka-avro-model.version>
     </properties>
