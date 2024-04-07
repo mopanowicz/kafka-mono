@@ -15,9 +15,9 @@ public class KafkaAvroSimpleProducerMain {
     public static void main(String[] args) {
         Properties properties = new Properties();
         properties.putAll(configuration.getAll());
-        KafkaProducer producer = new KafkaProducer(properties);
+        KafkaProducer<String, String> producer = new KafkaProducer<>(properties);
 
-        ProducerRecord<Object, Object> record = new ProducerRecord<>(
+        ProducerRecord<String, String> record = new ProducerRecord<>(
                 "test-messages",
                 "key-"+ (long)(Math.random() * 1000),
                 "value-"+ (long)(Math.random() * 1000));
