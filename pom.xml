@@ -11,6 +11,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>common-utilities</module>
         <module>kafka-avro-model</module>
         <module>kafka-simple-producer</module>
         <module>kafka-simple-consumer</module>
