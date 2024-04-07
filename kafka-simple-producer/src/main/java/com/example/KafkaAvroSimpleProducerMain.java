@@ -15,20 +15,16 @@ public class KafkaAvroSimpleProducerMain {
     public static void main(String[] args) {
         Properties properties = new Properties();
         properties.putAll(configuration.getAll());
-        KafkaProducer<String, String> producer = new KafkaProducer<>(properties);
-
-        ProducerRecord<String, String> record = new ProducerRecord<>(
-                "test-messages",
-                "key-"+ (long)(Math.random() * 1000),
-                "value-"+ (long)(Math.random() * 1000));
-        try {
+        try (KafkaProducer<String, String> producer = new KafkaProducer<>(properties)) {
+            ProducerRecord<String, String> record = new ProducerRecord<>(
+                    "test-messages",
+                    "key-"+ (long)(Math.random() * 1000),
+                    "value-"+ (long)(Math.random() * 1000));
             log.info("sending {}", record);
             producer.send(record);
             producer.flush();
         } catch(Exception e) {
             log.error("exception", e);
-        } finally {
-            producer.close();
         }
     }
 }
