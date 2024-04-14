@@ -18,8 +18,16 @@ public class KafkaAvroSimpleProducerMain {
         try (KafkaProducer<String, String> producer = new KafkaProducer<>(properties)) {
             ProducerRecord<String, String> record = new ProducerRecord<>(
                     "test-messages",
-                    "key-"+ (long)(Math.random() * 1000),
-                    "value-"+ (long)(Math.random() * 1000));
+                    """
+                    {
+                        "id": "1"
+                    }
+                    """,
+                    """
+                    {
+                        "field1": "value1"
+                    }
+                    """);
             log.info("sending {}", record);
             producer.send(record);
             producer.flush();
