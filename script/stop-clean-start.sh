@@ -1,5 +1,7 @@
 #!/bin/sh
 
+systemctl stop schema-registry
+
 systemctl stop kafka
 systemctl stop zookeeper
 
@@ -17,3 +19,5 @@ chown user $zookeeper
 
 systemctl start zookeeper
 systemctl start kafka
+
+systemctl start schema-registry
