@@ -15,25 +15,28 @@ public class KafkaSimpleProducerMain {
     static Configuration configuration = Configuration.getInstance();
 
     public static void main(String[] args) {
-        int count = 16;
-        int length = 32;
+        int count = 1;
+        int length = 64;
         Properties properties = new Properties();
         properties.putAll(configuration.getAll());
         try (KafkaProducer<String, String> producer = new KafkaProducer<>(properties)) {
             log.info("sending {} records", count);
             for (int i = 0; i < count; i++) {
+                String id = UUID.randomUUID().toString();
                 ProducerRecord<String, String> record = new ProducerRecord<>(
-                        "test-messages",
+                        "message",
                         """
                         {
                             "id": "%s"
                         }
-                        """.formatted(UUID.randomUUID()),
+                        """.formatted(id),
                         """
                         {
-                            "cargo": "%s"
+                            "id": "%s",
+                            "rnd": %d,
+                            "text": "%s"
                         }
-                        """.formatted(RandomStringUtils.random(length, true, true)));
+                        """.formatted(id, (int)(Math.random() * 1024), RandomStringUtils.random(length, true, true)));
                 producer.send(record);
             }
             producer.flush();
