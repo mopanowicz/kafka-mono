@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <log4j.version>2.23.1</log4j.version>
         <kafka.clients.version>3.6.1</kafka.clients.version>
-        <confluent.version>7.5.1</confluent.version>
+        <confluent.version>7.6.0</confluent.version>
         <kafka-avro-model.version>0.0.1</kafka-avro-model.version>
         <common-utilities.version>0.0.1</common-utilities.version>
     </properties>

@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <avro.version>1.11.3</avro.version>
-        <confluent.version>7.5.3</confluent.version>
+        <confluent.version>7.6.0</confluent.version>
         <lombok.version>1.18.30</lombok.version>
 
         <schema.registry.url>http://localhost:8081</schema.registry.url>
