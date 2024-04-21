@@ -16,15 +16,20 @@ public class KafkaAvroSimpleProducerMain {
     static Configuration configuration = Configuration.getInstance();
 
     public static void main(String[] args) {
-        int count = 1;
-        int length = 64;
+        int count = 10;
+        int length = 16384;
         Properties properties = new Properties();
         properties.putAll(configuration.getAll());
         try (KafkaProducer<Object, Object> producer = new KafkaProducer<>(properties)) {
             log.info("sending {} records", count);
             for (int i = 0; i < count; i++) {
                 String id = UUID.randomUUID().toString();
-                SimpleOne message = SimpleOne.newBuilder().setId(id).setSent(System.currentTimeMillis()).setText(RandomStringUtils.random(length, true, true)).build();
+                SimpleOne message = SimpleOne
+                        .newBuilder()
+                        .setId(id)
+                        .setSent(System.currentTimeMillis())
+                        .setText(RandomStringUtils.random(length, true, true))
+                        .build();
                 ProducerRecord<Object, Object> record = new ProducerRecord<>(
                         "simple-one",
                         id,
