@@ -13,6 +13,7 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <informix-jdbc.version>4.10.16</informix-jdbc.version>
+        <log4j.version>2.23.1</log4j.version>
     </properties>
 
     <dependencies>
@@ -20,6 +21,21 @@
             <groupId>com.ibm.informix</groupId>
             <artifactId>jdbc</artifactId>
             <version>${informix-jdbc.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log4j.version}</version>
         </dependency>
     </dependencies>
 
